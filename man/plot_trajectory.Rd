@@ -4,18 +4,21 @@
 \alias{plot_trajectory}
 \title{Plot the course of a CAT session}
 \usage{
-plot_trajectory(s)
+plot_trajectory(s, dark = FALSE)
 }
 \arguments{
 \item{s}{A CAT session with at least one answer (see \code{\link{cat_start}}).}
+
+\item{dark}{\code{TRUE} for light text and grid on a dark page.}
 }
 \value{
-\code{NULL}, invisibly; called for the plot.
+A \code{plotly} htmlwidget.
 }
 \description{
-Two panels: the standardized ability estimate and its standard error after each
-answer, across the whole test. A red vertical line marks the last answer of each
-finished scale, and a dashed red line the standard error at which a scale stops.
+An interactive \code{plotly} chart in two panels sharing the x axis: the
+standardized ability estimate and its standard error after each answer, across the
+whole test, one colour per scale. Hovering a point shows the statement and the
+answer; a dashed line marks the standard error at which a scale stops.
 }
 \examples{
 s <- cat_start(ipip50()$bank, scales = c("Openness", "Extraversion"), se_threshold = 0.5)

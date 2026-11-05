@@ -54,7 +54,7 @@ Starts the app, an adaptive (CAT) test of the Big Five personality traits with t
   \item{Take the test}{The questionnaire as a respondent sees it: one statement at a
     time, and at the end a profile of the five traits, each as a percentile of the
     calibration sample.}
-  \item{How CAT works}{The same test with its workings in view: choose the traits and
+  \item{CAT}{The same test with its workings in view: choose the traits and
     the standard error at which each stops, and follow after every answer the
     estimate and standard error of each trait, the items used, every answer, and a
     plot of the estimate and standard error step by step.}

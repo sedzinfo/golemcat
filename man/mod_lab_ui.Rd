@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_lab.R
 \name{mod_lab_ui}
 \alias{mod_lab_ui}
-\title{How CAT works tab - UI}
+\title{CAT tab - UI}
 \usage{
 mod_lab_ui(id, scales)
 }
@@ -12,17 +12,18 @@ mod_lab_ui(id, scales)
 \item{scales}{The traits to offer.}
 }
 \value{
-A \code{tagList} of Shiny UI elements.
+A \code{bslib} sidebar layout.
 }
 \description{
-The adaptive test with its workings in view: choose the traits and the standard
-error at which each one stops, then answer, and follow after every answer the
-estimate and standard error of each trait, how many items it used, every answer
-given, and a plot of the estimate and standard error step by step.
+The adaptive test with its workings in view. A sidebar holds the settings: the
+traits and the standard error at which each one stops. The main area has, side by
+side, the current statement and the progress of each trait (answered items,
+estimate, standard error), then a chart of the estimate and standard error after
+every answer, and the history of every answer given.
 }
 \examples{
 \dontrun{
-shiny::fluidPage(mod_lab_ui("lab", unique(ipip50()$bank$scale)))
+bslib::page_fluid(mod_lab_ui("lab", unique(ipip50()$bank$scale)))
 }
 }
 \keyword{internal}

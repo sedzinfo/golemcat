@@ -22,7 +22,7 @@ Imports:
     bslib (>= 0.6.0),
     config,
     golem,
-    graphics,
+    plotly,
     shiny,
     stats,
     utils

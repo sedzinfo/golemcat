@@ -1,6 +1,6 @@
 test_that("the page has the three tabs and the dark mode switch", {
   html <- htmltools::renderTags(app_ui(NULL))$html
-  for (tab in c("Take the test", "How CAT works", "About")) {
+  for (tab in c("Take the test", "CAT", "About")) {
     expect_match(html, paste0("data-value=\"", tab, "\""), fixed = TRUE)
   }
   expect_match(html, "bslib-input-dark-mode", fixed = TRUE)

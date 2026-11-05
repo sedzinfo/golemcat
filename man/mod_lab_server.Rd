@@ -2,25 +2,28 @@
 % Please edit documentation in R/mod_lab.R
 \name{mod_lab_server}
 \alias{mod_lab_server}
-\title{How CAT works tab - server}
+\title{CAT tab - server}
 \usage{
-mod_lab_server(id, questionnaire)
+mod_lab_server(id, questionnaire, dark_mode = reactive("light"))
 }
 \arguments{
 \item{id}{Character. Module namespace id, the same as in \code{\link{mod_lab_ui}}.}
 
 \item{questionnaire}{The questionnaire, as returned by \code{\link{ipip50}}.}
+
+\item{dark_mode}{A reactive returning \code{"dark"} or \code{"light"}, the mode of
+the page, which the chart follows.}
 }
 \value{
 None. Called for its side effect of registering the module server.
 }
 \description{
-How CAT works tab - server
+CAT tab - server
 }
 \examples{
 \dontrun{
 # inside app_server():
-mod_lab_server("lab", ipip50())
+mod_lab_server("lab", ipip50(), dark_mode = reactive(input$dark_mode))
 }
 }
 \keyword{internal}

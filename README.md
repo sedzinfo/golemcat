@@ -13,7 +13,7 @@ The app has three tabs:
 - **Take the test**: the questionnaire as a respondent sees it. One statement at a time with a
   progress bar, and at the end a profile of the five traits, each as a percentile of the
   calibration sample, with what a high and a low score mean.
-- **How CAT works**: the same test with its workings in view. Choose the traits and the standard
+- **CAT**: the same test with its workings in view. Choose the traits and the standard
   error at which each stops, then follow after every answer the estimate (θ) and standard error
   of each trait, how many items it used, every answer given, and a plot of θ and SE step by step.
 - **About**: how it works, the acknowledgments and the references.

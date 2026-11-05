@@ -36,7 +36,7 @@ mod_about_ui <- function(id) {
       " traits. Instead of giving everyone the same 50 statements, it picks after each answer the",
       " statement that tells the most about the person, and moves on from a trait as soon as its",
       " score is precise enough. The ", strong("Take the test"), " tab is the questionnaire as a",
-      " respondent sees it; the ", strong("How CAT works"), " tab shows what happens behind it:",
+      " respondent sees it; the ", strong("CAT"), " tab shows what happens behind it:",
       " the estimate and its standard error after every answer, and how many questions each trait",
       " needed."
     ),
