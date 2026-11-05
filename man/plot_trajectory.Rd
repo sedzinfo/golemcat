@@ -15,7 +15,7 @@ plot_trajectory(s, dark = FALSE)
 A \code{plotly} htmlwidget.
 }
 \description{
-An interactive \code{plotly} chart in two panels sharing the x axis: the
+An interactive \code{plotly} chart in two panels side by side: the
 standardized ability estimate and its standard error after each answer, across the
 whole test, one colour per scale. Hovering a point shows the statement and the
 answer; a dashed line marks the standard error at which a scale stops.

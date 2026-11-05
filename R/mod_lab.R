@@ -232,7 +232,7 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
 ##########################################################################################
 #' Plot the course of a CAT session
 #'
-#' An interactive \code{plotly} chart in two panels sharing the x axis: the
+#' An interactive \code{plotly} chart in two panels side by side: the
 #' standardized ability estimate and its standard error after each answer, across the
 #' whole test, one colour per scale. Hovering a point shows the statement and the
 #' answer; a dashed line marks the standard error at which a scale stops.
@@ -282,6 +282,8 @@ plot_trajectory <- function(s, dark = FALSE) {
     line = list(color = "#dc3545", dash = "dash", width = 1.5)
   )
   axis <- list(color = ink, gridcolor = grid, zerolinecolor = grid, linecolor = grid)
+  # a label on every answer, or every 2nd, 3rd... so that there are at most about 12
+  step <- max(1, ceiling(max(log$step) / 12))
   # theta on the left, SE on the right, each with its own answer axis
   fig <- plotly::subplot(panel("theta", TRUE), se_panel,
     nrows = 1, titleX = TRUE, titleY = TRUE, margin = 0.07
@@ -294,8 +296,8 @@ plot_trajectory <- function(s, dark = FALSE) {
     hoverlabel = list(align = "left"),
     modebar = list(bgcolor = "rgba(0,0,0,0)", color = ink, activecolor = "#0d6efd"),
     margin = list(t = 40, r = 10, b = 50, l = 60),
-    xaxis = c(axis, list(title = "Answer", dtick = 1)),
-    xaxis2 = c(axis, list(title = "Answer", dtick = 1)),
+    xaxis = c(axis, list(title = "Answer", dtick = step)),
+    xaxis2 = c(axis, list(title = "Answer", dtick = step)),
     yaxis = c(axis, list(title = "\u03b8 (standardized)")),
     yaxis2 = c(axis, list(title = "SE", rangemode = "tozero")),
     annotations = list(list(
