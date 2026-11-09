@@ -1,0 +1,86 @@
+url: https://sedzinfo.github.io/golemcat/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  math-rendering: katex   # renders the \eqn and \deqn maths of the help pages
+  includes:
+    # cookie banner and Google Analytics, shared by every site under sedzinfo.github.io (consent.js in that repository)
+    after_body: '<script src="/consent.js" defer></script>'
+
+code:
+  width: 200
+
+destination: docs
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [sedzinfo, github]
+  components:
+    sedzinfo:
+      icon: fas fa-house
+      text: home
+      href: https://sedzinfo.github.io/
+      aria-label: sedzinfo home page
+    github:
+      icon: fab fa-github
+      href: https://github.com/sedzinfo/golemcat
+      aria-label: GitHub
+
+reference:
+
+  - title: "App"
+    contents:
+      - run_app
+
+  - title: "Questionnaire"
+    desc: "The IPIP-50 item bank and answer options, and reading and checking item banks fitted with mirt"
+    contents:
+      - ipip50
+      - read_item_bank
+      - read_likert
+      - validate_item_bank_against_mirt
+
+  - title: "Adaptive test"
+    desc: "The CAT session: start, next item, answer, results"
+    contents:
+      - cat_start
+      - cat_item
+      - cat_answer
+      - cat_results
+
+  - title: "Report"
+    desc: "The PDF report of the profile, made with typst"
+    contents:
+      - report_pdf
+
+  - title: "Rating scale model engine"
+    desc: "Response probabilities, information, item selection, likelihood and EAP, the same as catR"
+    contents:
+      - Pi_rsm
+      - Ii_rsm
+      - next_item_rsm
+      - likelihood_rsm
+      - eap_est_rsm
+      - eap_se_rsm
+      - density_function
+      - integrate_cat
+
+  - title: "UI"
+    desc: "Internal functions not meant to run independently"
+    contents:
+      - matches("^mod_.*_ui$")
+
+  - title: "Server"
+    desc: "Internal functions not meant to run independently"
+    contents:
+      - matches("^mod_.*_server$")
+
+footer:
+  structure:
+    left: sedzinfo
+    right: sedzinfo_home
+  components:
+    sedzinfo: '[github.com/sedzinfo](https://github.com/sedzinfo) · [Cookie settings](#cookie-settings)'
+    sedzinfo_home: '[home](https://sedzinfo.github.io/)'

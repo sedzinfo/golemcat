@@ -9,3 +9,6 @@ man
 README.md
 tests
 screenshots
+_pkgdown.yml
+docs
+pkgdown

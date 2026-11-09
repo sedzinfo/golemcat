@@ -21,8 +21,9 @@ test()
 install()
 library(golemcat)
 
+pkgdown::build_site(getwd())
 system("R CMD Rd2pdf . --force --no-preview --output=golemcat.pdf")
 if (.Platform$OS.type == "windows") shell.exec("golemcat.pdf") else system("evince golemcat.pdf")
 system("R CMD build . --resave-data")
 
-golemcat::run_app() # starts the app: the console stays busy until you close it
+golemcat::run_app()
