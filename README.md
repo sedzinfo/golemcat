@@ -44,18 +44,25 @@ The profile at the end of the test, with the PDF report:
 
 ## Installation
 
-The repository is private, so `install_github()` needs a GitHub token with access to it
-(create one at <https://github.com/settings/tokens>, classic, `repo` scope):
+Open RStudio (or an R console) and run:
 
 ```r
+# Install devtools if you haven't already
 install.packages("devtools")
-devtools::install_github("sedzinfo/golemcat", auth_token = "ghp_...")
+# Install golemcat from GitHub
+devtools::install_github("sedzinfo/golemcat")
 ```
 
-The source tarball and the PDF manual of the current `main` are on the
-[latest release](https://github.com/sedzinfo/golemcat/releases/tag/latest), rebuilt on every
-change. Download the tarball (signed in to GitHub, with access to the repository) and install it
-with `install.packages("golemcat_0.0.0.9000.tar.gz", repos = NULL, type = "source")`.
+Without devtools, install the source tarball of the [latest release](https://github.com/sedzinfo/golemcat/releases/tag/latest), which is rebuilt from `main` on every change, together with the PDF manual:
+
+```r
+install.packages(
+  "https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz",
+  repos = NULL, type = "source"
+)
+```
+
+The PDF report of the app needs [typst](https://typst.app) or [quarto](https://quarto.org) installed.
 
 ## Usage
 

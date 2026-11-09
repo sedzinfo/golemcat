@@ -2,7 +2,7 @@ pandoc: '3.10'
 pkgdown: 2.2.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2026-11-09T13:18Z
+last_built: 2026-11-09T13:30Z
 urls:
   reference: https://sedzinfo.github.io/golemcat/reference
   article: https://sedzinfo.github.io/golemcat/articles
