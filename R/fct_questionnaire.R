@@ -13,6 +13,9 @@
 #                            the correct option (scored 1, every other option 0)
 #   reverse                  optional TRUE/FALSE: the answer is reversed before scoring
 #                            (ordered polytomous models only)
+#   public                   optional TRUE/FALSE: FALSE when the text of the item is not
+#                            public and only a placeholder is shown; the CAT tab then
+#                            highlights the correct option (key) in yellow
 #   a1, d, g, u              2PL/3PL/4PL (and Rasch with two categories)
 #   a1, b1..bK, c            rsm and grsm
 #   a1, d1..dK               graded
@@ -175,7 +178,9 @@ item_to_engine <- function(d, i) {
 #' \code{item} and \code{stem} (optional); \code{option1}, \code{option2}, ... (the
 #' answer options in scoring order, numbered when absent); \code{key} (the correct
 #' option of a dichotomous item given as several options); \code{reverse} (ordered
-#' polytomous items scored in reverse); the coefficients (\code{a1}, \code{b1}...,
+#' polytomous items scored in reverse); \code{public} (\code{FALSE} when the text of
+#' the item is not public and only a placeholder is shown, so that the CAT tab
+#' highlights the correct option); the coefficients (\code{a1}, \code{b1}...,
 #' \code{c}, \code{d}, \code{d0}..., \code{ak0}..., \code{g}, \code{u}, as \code{mirt}
 #' names them); and \code{prior_mean} and \code{prior_sd}, the mean and standard
 #' deviation of the latent trait of each scale (0 and 1 when absent).
@@ -186,7 +191,7 @@ item_to_engine <- function(d, i) {
 #' @return The item bank: a data frame with one row per item and the columns
 #'   \code{scale}, \code{item}, \code{question}, \code{stem}, \code{model},
 #'   \code{n_cat}, \code{n_options}, \code{options} (a list), \code{key},
-#'   \code{reverse}, \code{prior_mean}, \code{prior_sd} and \code{par1},
+#'   \code{reverse}, \code{public}, \code{prior_mean}, \code{prior_sd} and \code{par1},
 #'   \code{par2}, ... (the engine parameters). It can be given to
 #'   \code{\link{cat_start}}.
 #' @family questionnaire
@@ -224,6 +229,8 @@ read_questionnaire <- function(file) {
   key <- if (is.null(d$key)) rep(NA_integer_, nrow(d)) else suppressWarnings(as.integer(d$key))
   reverse <- if (is.null(d$reverse)) rep(FALSE, nrow(d)) else as.logical(d$reverse)
   reverse[is.na(reverse)] <- FALSE
+  public <- if (is.null(d$public)) rep(TRUE, nrow(d)) else as.logical(d$public)
+  public[is.na(public)] <- TRUE
   for (i in seq_len(nrow(d))) {
     if (model[i] == "dichotomous" && !is.na(key[i])) {
       if (key[i] < 1 || key[i] > n_options[i]) fail(sprintf("row %d: key %d is not one of its %d options", i + 1, key[i], n_options[i]))
@@ -259,6 +266,7 @@ read_questionnaire <- function(file) {
     n_options = n_options,
     key = key,
     reverse = reverse,
+    public = public,
     prior_mean = prior_mean,
     prior_sd = prior_sd,
     par,
@@ -292,6 +300,9 @@ read_questionnaire <- function(file) {
 #'   correct option of each item.
 #' @param reverse \code{TRUE} for items whose answers were reversed before the fit.
 #' @param stem An instruction shown above the items.
+#' @param public \code{FALSE} when the texts of the items are not public and
+#'   \code{question} is only a placeholder: the CAT tab then highlights the correct
+#'   option of keyed items.
 #'
 #' @return A data frame, one row per item.
 #' @family questionnaire
@@ -306,7 +317,7 @@ read_questionnaire <- function(file) {
 #' )
 #' write_questionnaire(q, "anxiety.csv")
 #' }
-questionnaire_from_mirt <- function(fit, scale, question = NULL, options = NULL, key = NULL, reverse = FALSE, stem = NA) {
+questionnaire_from_mirt <- function(fit, scale, question = NULL, options = NULL, key = NULL, reverse = FALSE, stem = NA, public = TRUE) {
   if (!requireNamespace("mirt", quietly = TRUE)) stop("mirt is required", call. = FALSE)
   if (mirt::extract.mirt(fit, "nfact") != 1) stop("the model must be unidimensional (one factor)", call. = FALSE)
   co <- mirt::coef(fit, simplify = TRUE)
@@ -323,6 +334,7 @@ questionnaire_from_mirt <- function(fit, scale, question = NULL, options = NULL,
   )
   if (!is.null(key)) out$key <- key
   if (!isFALSE(reverse)) out$reverse <- rep_len(as.logical(reverse), n)
+  if (!isTRUE(public)) out$public <- rep_len(as.logical(public), n)
   if (!is.null(options)) {
     opts <- if (is.list(options)) options else rep(list(options), n)
     k <- max(lengths(opts))

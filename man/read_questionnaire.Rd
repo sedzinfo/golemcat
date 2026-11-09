@@ -14,7 +14,7 @@ columns.}
 The item bank: a data frame with one row per item and the columns
   \code{scale}, \code{item}, \code{question}, \code{stem}, \code{model},
   \code{n_cat}, \code{n_options}, \code{options} (a list), \code{key},
-  \code{reverse}, \code{prior_mean}, \code{prior_sd} and \code{par1},
+  \code{reverse}, \code{public}, \code{prior_mean}, \code{prior_sd} and \code{par1},
   \code{par2}, ... (the engine parameters). It can be given to
   \code{\link{cat_start}}.
 }
@@ -32,7 +32,9 @@ The columns are \code{scale}, \code{question} and \code{itemtype} (required);
 \code{item} and \code{stem} (optional); \code{option1}, \code{option2}, ... (the
 answer options in scoring order, numbered when absent); \code{key} (the correct
 option of a dichotomous item given as several options); \code{reverse} (ordered
-polytomous items scored in reverse); the coefficients (\code{a1}, \code{b1}...,
+polytomous items scored in reverse); \code{public} (\code{FALSE} when the text of
+the item is not public and only a placeholder is shown, so that the CAT tab
+highlights the correct option); the coefficients (\code{a1}, \code{b1}...,
 \code{c}, \code{d}, \code{d0}..., \code{ak0}..., \code{g}, \code{u}, as \code{mirt}
 names them); and \code{prior_mean} and \code{prior_sd}, the mean and standard
 deviation of the latent trait of each scale (0 and 1 when absent).

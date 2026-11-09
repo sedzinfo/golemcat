@@ -43,7 +43,7 @@ The CAT tab with the graded response model on two of the Big Five traits:
 
 ![CAT tab: graded response model](screenshots/cat_grm.png)
 
-The CAT tab with the SAT12 science test, scored right/wrong with the 3PL:
+The CAT tab with the SAT12 science test, scored right/wrong with the 3PL. The question texts are not public, so the correct option is highlighted:
 
 ![CAT tab: SAT12, 3PL](screenshots/cat_3pl.png)
 
@@ -113,6 +113,7 @@ write_questionnaire(q, "anxiety.csv")                # or a list of scales
 | `option1`, `option2`, … | the answer options in scoring order (numbered when absent) |
 | `key` | right/wrong items given as several options: the correct one |
 | `reverse` | `TRUE` for ordered items scored in reverse |
+| `public` | `FALSE` when the item text is not public and only a placeholder is shown: the CAT tab then highlights the correct option (`key`) in yellow |
 | `a1`, `b1`…, `c`, `d`, `d0`…, `ak0`…, `g`, `u` | the coefficients of `coef(fit, simplify = TRUE)$items` |
 | `prior_mean`, `prior_sd` | mean and sd of the latent trait of the scale (0 and 1 when absent) |
 

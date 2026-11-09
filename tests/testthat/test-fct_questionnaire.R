@@ -10,6 +10,10 @@ test_that("one example for each of the six models, every one readable", {
     expect_true(all(b$n_options == b$n_cat | (b$model == "dichotomous" & !is.na(b$key))))
     expect_true(all(lengths(b$options) == b$n_options))
   }
+  # only the SAT12 texts are not public
+  is_sat <- grepl("SAT12", names(banks))
+  expect_true(all(vapply(banks[is_sat], function(b) all(!b$public), TRUE)))
+  expect_true(all(vapply(banks[!is_sat], function(b) all(b$public), TRUE)))
 })
 
 test_that("the engines give the same results as catR on every example", {

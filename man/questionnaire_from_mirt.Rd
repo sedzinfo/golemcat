@@ -11,7 +11,8 @@ questionnaire_from_mirt(
   options = NULL,
   key = NULL,
   reverse = FALSE,
-  stem = NA
+  stem = NA,
+  public = TRUE
 )
 }
 \arguments{
@@ -34,6 +35,10 @@ correct option of each item.}
 \item{reverse}{\code{TRUE} for items whose answers were reversed before the fit.}
 
 \item{stem}{An instruction shown above the items.}
+
+\item{public}{\code{FALSE} when the texts of the items are not public and
+\code{question} is only a placeholder: the CAT tab then highlights the correct
+option of keyed items.}
 }
 \value{
 A data frame, one row per item.

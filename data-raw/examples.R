@@ -65,10 +65,10 @@ sat_stem <- "The texts of the SAT12 questions are not public: choose one of the 
 
 message("3PL")
 fit <- mirt(key2binary(sat, key), 1, itemtype = "3PL", verbose = FALSE, SE = FALSE, technical = list(NCYCLES = 20000))
-rows <- questionnaire_from_mirt(fit, "Science (SAT12)", question = sat_question, options = sat_options, key = key, stem = sat_stem)
+rows <- questionnaire_from_mirt(fit, "Science (SAT12)", question = sat_question, options = sat_options, key = key, stem = sat_stem, public = FALSE)
 write_questionnaire(check(rows, fit), file.path(out_dir, "sat12_3pl.csv"))
 
 message("nominal")
 fit <- mirt(sat, 1, itemtype = "nominal", verbose = FALSE, SE = FALSE, technical = list(NCYCLES = 20000))
-rows <- questionnaire_from_mirt(fit, "Science (SAT12)", question = sat_question, options = sat_options, key = key, stem = sat_stem)
+rows <- questionnaire_from_mirt(fit, "Science (SAT12)", question = sat_question, options = sat_options, key = key, stem = sat_stem, public = FALSE)
 write_questionnaire(check(rows, fit), file.path(out_dir, "sat12_nrm.csv"))

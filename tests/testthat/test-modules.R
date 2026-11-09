@@ -46,10 +46,21 @@ test_that("CAT: the SAT12 examples show the options and the key", {
     session$setInputs(scales_include = "Science (SAT12)", se_threshold = 0.5, start = 1)
     html <- as.character(output$question_ui$html)
     expect_match(html, "Option E", fixed = TRUE)
-    expect_match(html, "Correct answer", fixed = TRUE)
     key <- rv$s$scale_meta$key[rv$s$current_item]
+    # the text is not public: the correct option, and only that one, is highlighted
+    expect_match(html, sprintf("<mark[^>]*>Option %s</mark>", LETTERS[key]))
+    expect_equal(lengths(regmatches(html, gregexpr("<mark", html))), 2) # the option and the note
     session$setInputs(response = as.character(key), submit = 1)
     expect_equal(rv$s$log$score, 1L)
+  })
+})
+
+test_that("CAT: public questions are not highlighted", {
+  testServer(mod_lab_server, {
+    session$setInputs(source = names(example_questionnaires())[1])
+    session$flushReact()
+    session$setInputs(scales_include = "Openness", se_threshold = 0.5, start = 1)
+    expect_false(grepl("<mark", as.character(output$question_ui$html), fixed = TRUE))
   })
 })
 

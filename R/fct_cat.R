@@ -99,8 +99,8 @@ cat_start_scale <- function(s, idx) {
 #' @return A list with the \code{scale}, the \code{stem} (\code{NA} when the bank has
 #'   none), the \code{question}, the answer \code{options} (\code{NULL} for a bank of
 #'   \code{\link{read_item_bank}}, whose options are the likert), the \code{key}
-#'   (the correct option of a dichotomous item, or \code{NA}) and the \code{model} of
-#'   the current item, or \code{NULL} when the test is done.
+#'   (the correct option of a dichotomous item, or \code{NA}), whether its text is
+#'   \code{public} and the \code{model} of the current item, or \code{NULL} when the test is done.
 #' @family CAT session
 #' @export
 #'
@@ -114,6 +114,7 @@ cat_item <- function(s) {
     scale = row$scale, stem = row$stem, question = row$question,
     options = if (is.null(row$options)) NULL else row$options[[1]],
     key = if (is.null(row$key)) NA_integer_ else row$key,
+    public = if (is.null(row$public)) TRUE else row$public,
     model = s$model
   )
 }

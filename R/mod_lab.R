@@ -223,21 +223,32 @@ mod_lab_server <- function(id, dark_mode = reactive("light")) {
       item <- cat_item(rv$s)
       options <- item$options
       if (is.null(options)) options <- as.character(seq_len(5))
+      # when the text of the question is not public, the correct option is highlighted
+      highlight <- !is.na(item$key) && !isTRUE(item$public)
+      marker <- function(..., .noWS = NULL) {
+        tags$mark(style = "background-color: #ffd43b; color: #212529; padding: 0 .3em; border-radius: .25em;", ..., .noWS = .noWS)
+      }
+      labels <- lapply(seq_along(options), function(k) {
+        if (highlight && k == item$key) marker(title = "The correct answer", options[k]) else options[k]
+      })
+      nrm_note <- if (item$model == "nrm") " The nominal model scores every option on its own, not right or wrong."
       tagList(
         if (!is.na(item$stem) && nzchar(item$stem)) p(class = "text-body-secondary mb-1", item$stem),
         p(class = "fs-4 fw-semibold", item$question),
         radioButtons(ns("response"),
           label = NULL,
-          choiceNames = as.list(options),
+          choiceNames = labels,
           choiceValues = as.list(as.character(seq_along(options))),
           selected = character(0)
         ),
-        if (!is.na(item$key)) {
+        if (highlight) {
           p(
             class = "small text-body-secondary",
-            "Correct answer: ", strong(options[item$key]),
-            if (item$model == "nrm") " (the nominal model scores every option on its own, not right or wrong)"
+            marker("Highlighted", .noWS = "after"), ": the correct answer, shown because the text of the question is not public.",
+            nrm_note
           )
+        } else if (!is.na(item$key)) {
+          p(class = "small text-body-secondary", "Correct answer: ", strong(options[item$key]), ".", nrm_note)
         }
       )
     })
