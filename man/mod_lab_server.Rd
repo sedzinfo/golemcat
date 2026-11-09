@@ -4,12 +4,10 @@
 \alias{mod_lab_server}
 \title{CAT tab - server}
 \usage{
-mod_lab_server(id, questionnaire, dark_mode = reactive("light"))
+mod_lab_server(id, dark_mode = reactive("light"))
 }
 \arguments{
 \item{id}{Character. Module namespace id, the same as in \code{\link{mod_lab_ui}}.}
-
-\item{questionnaire}{The questionnaire, as returned by \code{\link{ipip50}}.}
 
 \item{dark_mode}{A reactive returning \code{"dark"} or \code{"light"}, the mode of
 the page, which the chart follows.}
@@ -23,7 +21,7 @@ CAT tab - server
 \examples{
 \dontrun{
 # inside app_server():
-mod_lab_server("lab", ipip50(), dark_mode = reactive(input$dark_mode))
+mod_lab_server("lab", dark_mode = reactive(input$dark_mode))
 }
 }
 \keyword{internal}

@@ -16,7 +16,7 @@
 #'   before \code{compile}; \code{NULL} when none is found.
 #' @keywords internal
 #' @examples
-#' typst_command()
+#' golemcat:::typst_command()
 typst_command <- function() {
   env <- Sys.getenv("GOLEMCAT_TYPST")
   if (nzchar(env) && file.exists(env)) return(list(cmd = env, args = character(0)))
@@ -72,7 +72,7 @@ report_data <- function(res, bank) {
     answered = res$answered,
     total = res$total,
     sd = sprintf("%.2f", bank$prior_sd[match(res$scale, bank$scale)]),
-    z = sub("-", "−", sprintf("%+.2f", res$theta), fixed = TRUE),
+    z = sub("-", "\u2212", sprintf("%+.2f", res$theta), fixed = TRUE),
     pct = round(pct, 2),
     lo = round(clip(100 * stats::pnorm(res$theta - res$se)), 2),
     hi = round(clip(100 * stats::pnorm(res$theta + res$se)), 2),

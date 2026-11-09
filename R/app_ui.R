@@ -20,7 +20,6 @@
 #' shiny::shinyApp(ui = app_ui, server = app_server)
 #' }
 app_ui <- function(request, keep_alive = TRUE) {
-  scales <- unique(ipip50()$bank$scale)
   bslib::page_navbar(
     title = "golemcat",
     window_title = "golemcat: adaptive Big Five test",
@@ -32,7 +31,7 @@ app_ui <- function(request, keep_alive = TRUE) {
       if (keep_alive) div(style = "display:none", textOutput("keep_alive"))
     ),
     bslib::nav_panel("Take the test", mod_test_ui("test")),
-    bslib::nav_panel("CAT", mod_lab_ui("lab", scales)),
+    bslib::nav_panel("CAT", mod_lab_ui("lab")),
     bslib::nav_panel("About", mod_about_ui("about")),
     bslib::nav_spacer(),
     bslib::nav_item(bslib::input_dark_mode(id = "dark_mode"))

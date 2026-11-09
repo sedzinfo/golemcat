@@ -16,6 +16,6 @@ then \code{typst} on the path, then the copy that comes with 'quarto'
 (\code{quarto typst}).
 }
 \examples{
-typst_command()
+golemcat:::typst_command()
 }
 \keyword{internal}

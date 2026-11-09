@@ -4,26 +4,25 @@
 \alias{mod_lab_ui}
 \title{CAT tab - UI}
 \usage{
-mod_lab_ui(id, scales)
+mod_lab_ui(id)
 }
 \arguments{
 \item{id}{Character. Module namespace id.}
-
-\item{scales}{The traits to offer.}
 }
 \value{
 A \code{bslib} sidebar layout.
 }
 \description{
 The adaptive test with its workings in view. A sidebar holds the settings: the
-traits and the standard error at which each one stops. The main area has, side by
-side, the current statement and the progress of each trait (answered items,
-estimate, standard error), then a chart of the estimate and standard error after
-every answer, and the history of every answer given.
+questionnaire (one of the examples, one for each IRT model, or a csv of your own,
+see \code{\link{read_questionnaire}}), the scales and the standard error at which
+each one stops. The main area has, side by side, the current item and a chart of the
+estimate and standard error after every answer, then the progress of each scale and
+the history of every answer given.
 }
 \examples{
 \dontrun{
-bslib::page_fluid(mod_lab_ui("lab", unique(ipip50()$bank$scale)))
+bslib::page_fluid(mod_lab_ui("lab"))
 }
 }
 \keyword{internal}

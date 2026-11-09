@@ -59,7 +59,7 @@ test_that("cat_results() gives percentiles, and bad input is refused", {
   expect_gt(r$percentile, 50)
   expect_error(cat_start(q$bank, "Honesty"), "not in the item bank")
   expect_error(cat_start(q$bank, character(0)), "at least one scale")
-  expect_error(cat_answer(cat_start(q$bank, "Openness"), 6), "must be 1, 2, 3, 4 or 5")
+  expect_error(cat_answer(cat_start(q$bank, "Openness"), 6), "from 1 to 5")
 })
 
 test_that("plot_trajectory() draws a plotly chart, one trace per trait in each panel", {

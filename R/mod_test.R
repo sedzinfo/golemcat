@@ -69,11 +69,6 @@ mod_test_server <- function(id, questionnaire, se_threshold = 0.40) {
       if (rv$s$stage == "done") rv$stage <- "done"
     })
 
-    observeEvent(input$explain, {
-      req(rv$stage == "done")
-      showModal(test_explain(cat_results(rv$s), bank))
-    })
-
     output$pdf <- downloadHandler(
       filename = function() sprintf("big-five-profile-%s.pdf", format(Sys.Date())),
       content = function(file) {
@@ -247,100 +242,7 @@ test_results <- function(ns, res, n_items) {
       div(
         class = "d-flex flex-wrap gap-2",
         actionButton(ns("restart"), "Take the test again", class = "btn-outline-primary"),
-        actionButton(ns("explain"), "How is my score calculated?", class = "btn-outline-secondary"),
         downloadButton(ns("pdf"), "Download PDF report", class = "btn-primary")
-      )
-    )
-  )
-}
-##########################################################################################
-#
-##########################################################################################
-#' How the scores are calculated
-#'
-#' A dialog that explains, in plain words, how the answers become the percentages of
-#' the profile, with the numbers of this session.
-#'
-#' @param res The results, from \code{\link{cat_results}}.
-#' @param bank The item bank, from \code{\link{read_item_bank}}.
-#'
-#' @return A modal dialog.
-#' @noRd
-test_explain <- function(res, bank) {
-  sds <- bank$prior_sd[match(res$scale, bank$scale)]
-  # likely range: the percentile one standard error either side of the score
-  lo <- 100 * stats::pnorm(res$theta - res$se)
-  hi <- 100 * stats::pnorm(res$theta + res$se)
-  pc <- function(x) sprintf("%d%%", round(pmin(pmax(x, 1), 99)))
-  rows <- lapply(seq_len(nrow(res)), function(i) {
-    tags$tr(
-      tags$td(res$scale[i]),
-      tags$td(class = "text-end", sprintf("%d of %d", res$answered[i], res$total[i])),
-      tags$td(class = "text-end", sprintf("%.2f", sds[i])),
-      tags$td(class = "text-end", sprintf("%+.2f", res$theta[i])),
-      tags$td(class = "text-end fw-semibold", pc(res$percentile[i])),
-      tags$td(class = "text-end", sprintf("%s to %s", pc(lo[i]), pc(hi[i])))
-    )
-  })
-  modalDialog(
-    title = "How your scores are calculated",
-    size = "l",
-    easyClose = TRUE,
-    footer = modalButton("Close"),
-    h5("1. From your answers to a trait level"),
-    p(
-      "Every statement was calibrated on about 20,000 people with a statistical model",
-      " (the rating scale model). For each statement the model tells how likely people at",
-      " each level of a trait are to choose each answer. The test starts by assuming you are",
-      " at the average level. After every answer it works out which levels best fit all",
-      " your answers so far, and takes the average of those levels as your score.",
-      " It then shows you the statement that can tell it the most about you, and it stops",
-      " a trait as soon as the score is precise enough."
-    ),
-    h5("2. From a trait level to a standard score"),
-    p(
-      "In the comparison group the average level of each trait is set to 0. Your level",
-      " is divided by how widely the comparison group is spread on that trait (its standard",
-      " deviation). The result is a standard score: 0 is exactly average, +1 is one standard",
-      " deviation above average, and -1 is one below."
-    ),
-    h5("3. From a standard score to a percentage"),
-    p(
-      "Traits like these are assumed to follow a bell curve (the normal distribution).",
-      " The percentage on each bar is the share of the bell curve below your standard score:",
-      " a score of 0 gives 50%, +1 gives about 84% and -1 about 16%."
-    ),
-    h5("Your numbers"),
-    div(
-      class = "table-responsive",
-      tags$table(
-        class = "table table-sm align-middle",
-        tags$thead(tags$tr(
-          tags$th("Trait"),
-          tags$th(class = "text-end", "Statements"),
-          tags$th(class = "text-end", "Spread (SD)"),
-          tags$th(class = "text-end", "Standard score"),
-          tags$th(class = "text-end", "Percentage"),
-          tags$th(class = "text-end", "Likely range")
-        )),
-        tags$tbody(rows)
-      )
-    ),
-    h5("Good to know"),
-    tags$ul(
-      tags$li(
-        "Every score has some uncertainty. The likely range is the percentage one standard",
-        " error either side of your score: it is about two times out of three that your",
-        " true percentage lies in it."
-      ),
-      tags$li(
-        "With only a few answers, scores are drawn a little towards the middle, because the",
-        " test starts from the average and needs evidence to move away from it."
-      ),
-      tags$li(
-        "The percentages come from the bell curve, not from counting people one by one, and",
-        " the comparison group took the questionnaire online, so it does not represent any",
-        " particular country."
       )
     )
   )

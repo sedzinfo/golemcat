@@ -4,41 +4,51 @@
 #' CAT tab - UI
 #'
 #' The adaptive test with its workings in view. A sidebar holds the settings: the
-#' traits and the standard error at which each one stops. The main area has, side by
-#' side, the current statement and the progress of each trait (answered items,
-#' estimate, standard error), then a chart of the estimate and standard error after
-#' every answer, and the history of every answer given.
+#' questionnaire (one of the examples, one for each IRT model, or a csv of your own,
+#' see \code{\link{read_questionnaire}}), the scales and the standard error at which
+#' each one stops. The main area has, side by side, the current item and a chart of the
+#' estimate and standard error after every answer, then the progress of each scale and
+#' the history of every answer given.
 #'
 #' @param id Character. Module namespace id.
-#' @param scales The traits to offer.
 #'
 #' @return A \code{bslib} sidebar layout.
 #' @keywords internal
 #' @examples
 #' \dontrun{
-#' bslib::page_fluid(mod_lab_ui("lab", unique(ipip50()$bank$scale)))
+#' bslib::page_fluid(mod_lab_ui("lab"))
 #' }
-mod_lab_ui <- function(id, scales) {
+mod_lab_ui <- function(id) {
   ns <- NS(id)
+  examples <- example_questionnaires()
   bslib::layout_sidebar(
     fillable = FALSE,
     sidebar = bslib::sidebar(
       title = "Settings",
-      width = 300,
-      checkboxGroupInput(ns("scales_include"), "Traits", choices = scales, selected = scales),
-      sliderInput(ns("se_threshold"), "Stop a trait at standard error",
+      width = 320,
+      selectInput(ns("source"), "Questionnaire",
+        choices = c(names(examples), "Your own csv file\u2026" = "upload"),
+        selected = names(examples)[1], width = "100%"
+      ),
+      conditionalPanel(
+        sprintf("input['%s'] == 'upload'", ns("source")),
+        fileInput(ns("upload"), NULL, accept = c(".csv", "text/csv"), placeholder = "No file chosen", width = "100%")
+      ),
+      uiOutput(ns("source_info")),
+      checkboxGroupInput(ns("scales_include"), "Scales", choices = character(0)),
+      sliderInput(ns("se_threshold"), "Stop a scale at standard error",
         min = 0.10, max = 0.70, value = 0.45, step = 0.01, width = "100%"
       ),
       uiOutput(ns("threshold_note")),
       actionButton(ns("start"), "Start / restart the test", class = "btn-primary w-100"),
       p(
         class = "small text-body-secondary mt-2 mb-0",
-        "\u03b8 and SE are standardized per trait (divided by the sd of the \u03b8 distribution",
-        " that mirt estimated), so a threshold is the same target in every trait."
+        "\u03b8 and SE are standardized per scale (divided by the sd of the \u03b8 distribution",
+        " of the calibration), so a threshold is the same target in every scale."
       )
     ),
     # two rows, each side by side from 1200px wide and stacked below that, where the
-    # tables would be too narrow: the statement and the chart, then the progress and
+    # tables would be too narrow: the item and the chart, then the progress and
     # the history
     bslib::layout_columns(
       col_widths = bslib::breakpoints(sm = 12, xl = c(5, 7)),
@@ -59,7 +69,7 @@ mod_lab_ui <- function(id, scales) {
     bslib::layout_columns(
       col_widths = bslib::breakpoints(sm = 12, xl = c(5, 7)),
       bslib::card(
-        bslib::card_header("Progress by trait"),
+        bslib::card_header("Progress by scale"),
         bslib::card_body(
           div(style = "overflow-x: auto;", tableOutput(ns("progress_table"))),
           uiOutput(ns("overall_ui"))
@@ -81,7 +91,6 @@ mod_lab_ui <- function(id, scales) {
 #' CAT tab - server
 #'
 #' @param id Character. Module namespace id, the same as in \code{\link{mod_lab_ui}}.
-#' @param questionnaire The questionnaire, as returned by \code{\link{ipip50}}.
 #' @param dark_mode A reactive returning \code{"dark"} or \code{"light"}, the mode of
 #'   the page, which the chart follows.
 #'
@@ -90,19 +99,81 @@ mod_lab_ui <- function(id, scales) {
 #' @examples
 #' \dontrun{
 #' # inside app_server():
-#' mod_lab_server("lab", ipip50(), dark_mode = reactive(input$dark_mode))
+#' mod_lab_server("lab", dark_mode = reactive(input$dark_mode))
 #' }
-mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
+mod_lab_server <- function(id, dark_mode = reactive("light")) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    bank <- questionnaire$bank
-    likert <- questionnaire$likert
+    examples <- example_questionnaires()
+    models <- irt_models()
     rv <- reactiveValues(s = NULL)
 
+    # the questionnaire chosen: an example or an uploaded csv
+    loaded <- reactive({
+      req(input$source)
+      if (identical(input$source, "upload")) {
+        if (is.null(input$upload)) return(list(bank = NULL, error = NULL, path = NULL, name = NULL))
+        path <- input$upload$datapath
+        name <- input$upload$name
+      } else {
+        path <- examples[[input$source]]
+        name <- basename(path)
+      }
+      tryCatch(
+        list(bank = read_questionnaire(path), error = NULL, path = path, name = name),
+        error = function(e) list(bank = NULL, error = sub("^[^:]*: ", "", conditionMessage(e)), path = NULL, name = name)
+      )
+    })
+
+    observeEvent(loaded(), {
+      bank <- loaded()$bank
+      scales <- if (is.null(bank)) character(0) else unique(bank$scale)
+      updateCheckboxGroupInput(session, "scales_include", choices = scales, selected = scales)
+      rv$s <- NULL
+    })
+
+    output$source_info <- renderUI({
+      l <- loaded()
+      if (!is.null(l$error)) {
+        return(div(class = "alert alert-danger small py-2", strong(l$name), br(), l$error))
+      }
+      if (is.null(l$bank)) {
+        return(p(
+          class = "small text-body-secondary",
+          "A csv with one row per item: the text, the answer options and the coefficients",
+          " of a model fitted with mirt. Download an example to see the columns."
+        ))
+      }
+      bank <- l$bank
+      used <- unique(bank$model)
+      tagList(
+        p(
+          class = "small mb-1",
+          strong(paste(models$label[match(used, models$model)], collapse = " + ")), br(),
+          span(class = "text-body-secondary", sprintf(
+            "%d %s, %d items", length(unique(bank$scale)),
+            if (length(unique(bank$scale)) == 1) "scale" else "scales", nrow(bank)
+          ))
+        ),
+        p(class = "small", downloadLink(ns("download_csv"), "\u2193 Download this questionnaire as csv"))
+      )
+    })
+
+    output$download_csv <- downloadHandler(
+      filename = function() {
+        n <- loaded()$name
+        if (is.null(n)) "questionnaire.csv" else n
+      },
+      content = function(file) file.copy(loaded()$path, file, overwrite = TRUE),
+      contentType = "text/csv"
+    )
+
     observeEvent(input$start, {
-      req(length(input$scales_include) >= 1)
-      # the traits in the order of the bank, whatever the order they were ticked in
+      bank <- loaded()$bank
+      req(bank, length(input$scales_include) >= 1)
+      # the scales in the order of the bank, whatever the order they were ticked in
       scales <- intersect(unique(bank$scale), input$scales_include)
+      req(length(scales) >= 1)
       rv$s <- cat_start(bank, scales, input$se_threshold)
     })
 
@@ -125,12 +196,12 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
         "Not started"
       } else if (s$stage == "testing") {
         tagList(
-          strong(sprintf("Trait %d of %d: %s", s$idx, length(s$scales), s$scales[s$idx])),
+          strong(sprintf("Scale %d of %d: %s", s$idx, length(s$scales), s$scales[s$idx])),
           span(
             class = "text-body-secondary ms-2",
             sprintf(
-              "statement %d of %d \u00b7 \u03b8 = %.2f \u00b7 SE = %s",
-              length(s$administered) + 1, nrow(s$scale_matrix),
+              "%s \u00b7 item %d of %d \u00b7 \u03b8 = %.2f \u00b7 SE = %s",
+              toupper(s$model), length(s$administered) + 1, nrow(s$scale_matrix),
               (s$theta - s$prior[1]) / s$prior[2],
               ifelse(is.na(s$se), "-", sprintf("%.3f", s$se / s$prior[2]))
             )
@@ -145,20 +216,29 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
       if (is.null(rv$s)) {
         return(p(
           class = "text-body-secondary",
-          "Choose the traits and the standard error in the settings, then press Start."
+          "Choose a questionnaire, the scales and the standard error in the settings, then press Start."
         ))
       }
       req(rv$s$stage == "testing")
       item <- cat_item(rv$s)
+      options <- item$options
+      if (is.null(options)) options <- as.character(seq_len(5))
       tagList(
         if (!is.na(item$stem) && nzchar(item$stem)) p(class = "text-body-secondary mb-1", item$stem),
         p(class = "fs-4 fw-semibold", item$question),
         radioButtons(ns("response"),
           label = NULL,
-          choiceNames = as.list(likert$label),
-          choiceValues = as.list(as.character(likert$value)),
+          choiceNames = as.list(options),
+          choiceValues = as.list(as.character(seq_along(options))),
           selected = character(0)
-        )
+        ),
+        if (!is.na(item$key)) {
+          p(
+            class = "small text-body-secondary",
+            "Correct answer: ", strong(options[item$key]),
+            if (item$model == "nrm") " (the nominal model scores every option on its own, not right or wrong)"
+          )
+        }
       )
     })
 
@@ -172,10 +252,11 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
       p <- rv$s$progress
       tagList(
         p(sprintf(
-          "Completed %d traits with %d of %d statements (%d%% fewer).",
-          nrow(p), sum(p$answered), sum(p$total), round(100 * (1 - sum(p$answered) / sum(p$total)))
+          "Completed %d %s with %d of %d items (%d%% fewer).",
+          nrow(p), if (nrow(p) == 1) "scale" else "scales", sum(p$answered), sum(p$total),
+          round(100 * (1 - sum(p$answered) / sum(p$total)))
         )),
-        p(class = "text-body-secondary", "The progress table has the final \u03b8 and SE of each trait.")
+        p(class = "text-body-secondary", "The progress table has the final \u03b8 and SE of each scale.")
       )
     })
 
@@ -191,7 +272,7 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
           status = df$status,
           stringsAsFactors = FALSE
         )
-        colnames(out) <- c("Trait", "Answered", "\u03b8", "SE", "Status")
+        colnames(out) <- c("Scale", "Answered", "\u03b8", "SE", "Status")
         out
       },
       width = "100%", spacing = "s", hover = TRUE
@@ -203,7 +284,7 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
       p(
         class = "small text-body-secondary mb-0",
         sprintf(
-          "%d of %d statements so far (%d%% fewer than giving them all).",
+          "%d of %d items so far (%d%% fewer than giving them all).",
           sum(p$answered), sum(p$total), round(100 * (1 - sum(p$answered) / sum(p$total)))
         )
       )
@@ -220,7 +301,7 @@ mod_lab_server <- function(id, questionnaire, dark_mode = reactive("light")) {
         tbl <- rv$s$log[order(-rv$s$log$step), ]
         tbl$theta <- sprintf("%.2f", tbl$theta)
         tbl$se <- sprintf("%.3f", tbl$se)
-        colnames(tbl) <- c("Step", "Trait", "Statement", "Answer", "\u03b8", "SE")
+        colnames(tbl) <- c("Step", "Scale", "Item", "Answer", "Score", "\u03b8", "SE")
         tbl
       },
       width = "100%", spacing = "s", hover = TRUE
@@ -257,8 +338,8 @@ plot_trajectory <- function(s, dark = FALSE) {
   ink <- if (dark) "#dee2e6" else "#343a40"
   grid <- if (dark) "#495057" else "#e9ecef"
   log$hover <- sprintf(
-    "<b>%s</b><br>%s<br>Answer %d<br>\u03b8 = %.2f, SE = %.3f",
-    log$scale, log$question, log$answer, log$theta, log$se
+    "<b>%s</b><br>%s<br>Answer %d (scored %d)<br>\u03b8 = %.2f, SE = %.3f",
+    log$scale, log$question, log$answer, log$score, log$theta, log$se
   )
 
   panel <- function(y, legend) {
