@@ -134,7 +134,7 @@ item_to_engine <- function(d, i) {
     },
     graded = {
       dk <- need(row_values(d, i, numbered_cols(d, "d")), "d1, d2, ...")
-      if (!is.finite(a1) || a1 <= 0) stop(sprintf("row %d: a1 must be positive for graded items", i + 1), call. = FALSE)
+      if (!is.finite(a1) || a1 <= 0) stop(sprintf("row %d: a1 must be a positive number for graded items", i + 1), call. = FALSE)
       list(model = "grm", par = c(a1, -dk / a1), n_cat = length(dk) + 1L)
     },
     rasch = {
@@ -214,6 +214,8 @@ read_questionnaire <- function(file) {
   conv <- tryCatch(lapply(seq_len(nrow(d)), function(i) item_to_engine(d, i)), error = function(e) fail(conditionMessage(e)))
   model <- vapply(conv, `[[`, "", "model")
   n_cat <- vapply(conv, `[[`, 0L, "n_cat")
+  not_finite <- which(!vapply(conv, function(x) all(is.finite(x$par)), TRUE))
+  if (length(not_finite)) fail("coefficients that are not finite numbers in rows ", paste(not_finite + 1, collapse = ", "))
   mixed <- tapply(model, d$scale, function(x) length(unique(x)) > 1)
   if (any(mixed)) fail("one model per scale, but these scales mix models: ", paste(names(mixed)[mixed], collapse = ", "))
 
@@ -247,7 +249,9 @@ read_questionnaire <- function(file) {
 
   prior_mean <- vapply(seq_len(nrow(d)), function(i) row_value(d, i, "prior_mean", 0), 0)
   prior_sd <- vapply(seq_len(nrow(d)), function(i) row_value(d, i, "prior_sd", 1), 0)
-  if (any(prior_sd <= 0)) fail("prior_sd must be positive")
+  if (!all(is.finite(prior_mean)) || !all(is.finite(prior_sd)) || any(prior_sd <= 0 | prior_sd > 100)) {
+    fail("prior_mean must be a number, and prior_sd a number above 0 and at most 100")
+  }
   uneven <- tapply(seq_len(nrow(d)), d$scale, function(i) length(unique(prior_mean[i])) > 1 || length(unique(prior_sd[i])) > 1)
   if (any(uneven)) fail("prior_mean and prior_sd must be the same for every item of a scale, not in: ", paste(names(uneven)[uneven], collapse = ", "))
 

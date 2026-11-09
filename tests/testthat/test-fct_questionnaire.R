@@ -86,6 +86,12 @@ test_that("broken files stop with the row and the problem", {
   expect_error(read_questionnaire(bad), "row 5")
   bad <- d; bad$prior_sd[2] <- 2
   expect_error(read_questionnaire(bad), "prior_mean and prior_sd")
+  bad <- d; bad$prior_sd <- 1e300
+  expect_error(read_questionnaire(bad), "at most 100")
+  bad <- d; bad$a1[1] <- Inf
+  expect_error(read_questionnaire(bad), "row 2: a1 must be a positive number")
+  bad <- d; bad$d2[3] <- -Inf
+  expect_error(read_questionnaire(bad), "not finite numbers in rows 4")
   mixed <- d[1:6, ]
   mixed$d0 <- NA
   mixed$itemtype[4:6] <- "Rasch"
@@ -104,4 +110,16 @@ test_that("questionnaire_from_mirt writes a csv that reads back and matches mirt
   b <- read_questionnaire(f)
   expect_equal(b$options[[1]], c("Never", "Sometimes", "Often", "Always"))
   expect_lt(validate_questionnaire_against_mirt(b, fit), 1e-10)
+})
+
+test_that("texts from a csv cannot put html into the chart", {
+  d <- utils::read.csv(ex[[3]], check.names = FALSE, stringsAsFactors = FALSE)
+  d$question <- '<img src=x onerror=alert(1)> <b>bold</b>'
+  d$scale <- paste0(d$scale, "<script>x</script>")
+  b <- read_questionnaire(d)
+  s <- cat_start(b, unique(b$scale)[1])
+  s <- cat_answer(s, 3)
+  js <- as.character(htmlwidgets:::toJSON(plot_trajectory(s)$x))
+  expect_false(grepl("<img|<b>bold|<script>", js))
+  expect_match(js, "&lt;img src=x", fixed = TRUE)
 })

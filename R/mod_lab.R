@@ -107,6 +107,14 @@ mod_lab_server <- function(id, dark_mode = reactive("light")) {
     examples <- example_questionnaires()
     models <- irt_models()
     rv <- reactiveValues(s = NULL)
+    # a questionnaire that reads well can still have numbers that break the engine:
+    # show the error and keep the session, instead of closing it
+    safely <- function(expr, fallback) {
+      tryCatch(expr, error = function(e) {
+        showNotification(paste("The test stopped:", conditionMessage(e)), type = "error", duration = 10)
+        fallback
+      })
+    }
 
     # the questionnaire chosen: an example or an uploaded csv
     loaded <- reactive({
@@ -174,12 +182,12 @@ mod_lab_server <- function(id, dark_mode = reactive("light")) {
       # the scales in the order of the bank, whatever the order they were ticked in
       scales <- intersect(unique(bank$scale), input$scales_include)
       req(length(scales) >= 1)
-      rv$s <- cat_start(bank, scales, input$se_threshold)
+      rv$s <- safely(cat_start(bank, scales, input$se_threshold), rv$s)
     })
 
     observeEvent(input$submit, {
       req(rv$s, rv$s$stage == "testing", input$response)
-      rv$s <- cat_answer(rv$s, as.integer(input$response))
+      rv$s <- safely(cat_answer(rv$s, as.integer(input$response)), rv$s)
     })
 
     output$threshold_note <- renderUI({
@@ -348,9 +356,11 @@ plot_trajectory <- function(s, dark = FALSE) {
   colours <- stats::setNames(rep_len(palette, length(s$scales)), s$scales)
   ink <- if (dark) "#dee2e6" else "#343a40"
   grid <- if (dark) "#495057" else "#e9ecef"
+  # the texts come from the questionnaire, maybe an uploaded csv: plotly reads hover
+  # and legend text as html, so they are escaped
   log$hover <- sprintf(
     "<b>%s</b><br>%s<br>Answer %d (scored %d)<br>\u03b8 = %.2f, SE = %.3f",
-    log$scale, log$question, log$answer, log$score, log$theta, log$se
+    escape_html(log$scale), escape_html(log$question), log$answer, log$score, log$theta, log$se
   )
 
   panel <- function(y, legend) {
@@ -359,7 +369,7 @@ plot_trajectory <- function(s, dark = FALSE) {
       d <- log[log$scale == sc, ]
       p <- plotly::add_trace(p,
         x = d$step, y = d[[y]], type = "scatter", mode = "lines+markers",
-        name = sc, legendgroup = sc, showlegend = legend,
+        name = escape_html(sc), legendgroup = escape_html(sc), showlegend = legend,
         line = list(color = colours[[sc]], width = 2),
         marker = list(color = colours[[sc]], size = 8),
         text = d$hover, hoverinfo = "text"
