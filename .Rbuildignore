@@ -12,7 +12,6 @@
 ^\.rscignore$
 ^rsconnect$
 ^manifest\.json$
-^screenshots$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$

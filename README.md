@@ -1,5 +1,7 @@
 # golemcat: an adaptive Big Five personality test
 
+**[Open the live app](https://sedzinfo-golemcat.share.connect.posit.cloud/)** · [Website](https://sedzinfo.github.io/golemcat/)
+
 **golemcat** is an R package with a [Shiny](https://shiny.posit.co/) app, built with
 [golem](https://thinkr-open.github.io/golem/), that gives the 50 statements of the IPIP
 Big-Five Factor Markers as a **computerized adaptive test (CAT)**. Rather than giving everyone
@@ -38,7 +40,7 @@ tests check.
 
 The profile at the end of the test, with the PDF report:
 
-![Take the test: the profile](screenshots/test_profile.png)
+![Take the test: the profile](man/figures/golemcat1.png)
 
 ## Installation
 

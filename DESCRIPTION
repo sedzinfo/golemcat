@@ -14,7 +14,7 @@ Description: A 'shiny' application, built as a 'golem' package, that gives the
     results as 'catR', and the session logic are also R functions, and any
     item bank fitted with the rating scale model of 'mirt' can be read.
 License: GPL-3
-URL: https://sedzinfo.github.io/golemcat/, https://github.com/sedzinfo/golemcat
+URL: https://sedzinfo.github.io/golemcat/, https://github.com/sedzinfo/golemcat, https://sedzinfo-golemcat.share.connect.posit.cloud/
 BugReports: https://github.com/sedzinfo/golemcat/issues
 Depends:
     R (>= 4.1.0)
