@@ -33,6 +33,20 @@ The app has three tabs:
 The engine gives the same results as [catR](https://cran.r-project.org/package=catR), which the
 tests check.
 
+## Screenshots
+
+The profile at the end of the test, with the PDF report:
+
+![Take the test: the profile](screenshots/test_profile.png)
+
+The CAT tab with the graded response model on two of the Big Five traits:
+
+![CAT tab: graded response model](screenshots/cat_grm.png)
+
+The CAT tab with the SAT12 science test, scored right/wrong with the 3PL:
+
+![CAT tab: SAT12, 3PL](screenshots/cat_3pl.png)
+
 ## Installation
 
 The repository is private, so `install_github()` needs a GitHub token with access to it
@@ -170,9 +184,13 @@ domain. The calibration data is from the
 ## References
 
 - Andrich, D. (1978). A rating formulation for ordered response categories. *Psychometrika*, 43(4), 561-573.
+- Bock, R. D. (1972). Estimating item parameters and latent ability when responses are scored in two or more nominal categories. *Psychometrika*, 37(1), 29-51.
 - Chalmers, R. P. (2012). mirt: A multidimensional item response theory package for the R environment. *Journal of Statistical Software*, 48(6), 1-29.
 - Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. *Psychological Assessment*, 4(1), 26-42.
 - Magis, D., & Barrada, J. R. (2017). Computerized adaptive testing with R: Recent updates of the package catR. *Journal of Statistical Software*, 76(1), 1-19.
+- Masters, G. N. (1982). A Rasch model for partial credit scoring. *Psychometrika*, 47(2), 149-174.
+- Muraki, E. (1990). Fitting a polytomous item response model to Likert-type data. *Applied Psychological Measurement*, 14(1), 59-71.
+- Samejima, F. (1969). Estimation of latent ability using a response pattern of graded scores. *Psychometrika Monograph Supplement*, 17.
 - van der Linden, W. J., & Glas, C. A. W. (Eds.) (2010). *Elements of Adaptive Testing*. Springer.
 
 ## License
