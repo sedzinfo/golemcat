@@ -17,7 +17,7 @@ test_that("run_app() returns a shiny app with the threshold in the golem options
 })
 
 test_that("every file of inst/app/www that the page names exists", {
-  head <- htmltools::renderTags(app_ui(NULL, keep_alive = TRUE))$head
+  head <- htmltools::renderTags(app_ui(NULL, analytics = TRUE, keep_alive = TRUE))$head
   files <- unique(regmatches(head, gregexpr("www/[A-Za-z0-9_.-]+", head))[[1]])
   expect_true(length(files) >= 2)
   expect_equal(files[!file.exists(file.path(app_sys("app"), files))], character())
@@ -25,4 +25,18 @@ test_that("every file of inst/app/www that the page names exists", {
 
 test_that("the server starts every module", {
   expect_no_error(testServer(app_server, {}))
+})
+
+test_that("Google Analytics and its cookie banner are in the page only when asked for", {
+  page <- function(analytics) htmltools::renderTags(app_ui(NULL, analytics = analytics))
+  with <- page(TRUE)
+  expect_match(with$head, "https://sedzinfo.github.io/consent.js", fixed = TRUE)
+  expect_match(with$head, "www/analytics.js", fixed = TRUE)
+  expect_match(with$html, "#cookie-settings", fixed = TRUE)
+  expect_match(with$html, "https://sedzinfo.github.io/privacy.html", fixed = TRUE)
+  without <- page(FALSE)
+  expect_no_match(without$head, "consent.js", fixed = TRUE)
+  expect_no_match(without$html, "cookie-settings", fixed = TRUE)
+  # run_app() leaves it off: only the deployed app.R turns it on
+  expect_false(formals(run_app)$analytics)
 })

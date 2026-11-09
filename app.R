@@ -14,7 +14,9 @@ Sys.unsetenv("RSTUDIO")
 
 pkgload::load_all(export_all = FALSE, helpers = FALSE, attach_testthat = FALSE)
 options("golem.app.prod" = TRUE)
-run_app(keep_alive = FALSE)
+run_app(analytics = TRUE, keep_alive = FALSE)
 
 
 
+
+# rsconnect::writeManifest(appDir = ".", appPrimaryDoc = "app.R")

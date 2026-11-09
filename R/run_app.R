@@ -17,6 +17,10 @@
 #' @param se_threshold Standardized standard error at which a trait stops in the Take
 #'   the test tab. The default 0.40 aims at a reliability of about .84 per trait and
 #'   uses about 43 of the 50 statements; 0.45 uses about 36.
+#' @param analytics \code{TRUE} to add Google Analytics, through the cookie banner shared with
+#'   the sites of sedzinfo.github.io, which loads it only after the visitor accepts. Meant for the
+#'   public deployment (see \code{app.R}); off by default, so that running the app yourself sends
+#'   nothing.
 #' @param keep_alive \code{TRUE} to ping the server every 15 seconds while the page is
 #'   open, so that proxies do not close idle connections.
 #' @inheritParams shiny::shinyApp
@@ -32,12 +36,12 @@
 #' run_app()
 #' run_app(se_threshold = 0.45, options = list(port = 8080))
 #' }
-run_app <- function(se_threshold = 0.40, keep_alive = TRUE, onStart = NULL, options = list(),
+run_app <- function(se_threshold = 0.40, analytics = FALSE, keep_alive = TRUE, onStart = NULL, options = list(),
                     enableBookmarking = NULL, uiPattern = "/", ...) {
   with_golem_options(
     # shiny calls the ui function with the request only, so the setting is passed in here
     app = shinyApp(
-      ui = function(request) app_ui(request, keep_alive), server = app_server, onStart = onStart,
+      ui = function(request) app_ui(request, analytics, keep_alive), server = app_server, onStart = onStart,
       options = options, enableBookmarking = enableBookmarking, uiPattern = uiPattern
     ),
     golem_opts = list(se_threshold = se_threshold, ...)
