@@ -51,21 +51,3 @@ percentile_text <- function(p) {
     sprintf("lower than about %d%% of people", 100 - p)
   )
 }
-##########################################################################################
-#
-##########################################################################################
-#' Escape text for html
-#'
-#' For texts that go where html is read, such as plotly hover and legend text, which
-#' may come from an uploaded csv.
-#'
-#' @param x A character vector.
-#'
-#' @return \code{x} with \code{&}, \code{<}, \code{>} and \code{"} as entities.
-#' @noRd
-escape_html <- function(x) {
-  x <- gsub("&", "&amp;", x, fixed = TRUE)
-  x <- gsub("<", "&lt;", x, fixed = TRUE)
-  x <- gsub(">", "&gt;", x, fixed = TRUE)
-  gsub("\"", "&quot;", x, fixed = TRUE)
-}

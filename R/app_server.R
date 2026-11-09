@@ -19,8 +19,6 @@ app_server <- function(input, output, session) {
   se_threshold <- golem::get_golem_options("se_threshold")
   if (is.null(se_threshold)) se_threshold <- 0.40
   mod_test_server("test", questionnaire, se_threshold = se_threshold)
-  # the chart of the CAT tab follows the light/dark switch of the navbar
-  mod_lab_server("lab", dark_mode = reactive(input$dark_mode))
 
   # answers the pings of keep_alive.js, so that proxies do not close an idle connection
   output$keep_alive <- renderText({

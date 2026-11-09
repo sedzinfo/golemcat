@@ -3,9 +3,9 @@
 ##########################################################################################
 #' The application User-Interface
 #'
-#' A navbar page with three tabs, each a Shiny module: Take the test
-#' (\code{mod_test_ui()}), CAT (\code{mod_lab_ui()}) and About
-#' (\code{mod_about_ui()}), and a light/dark mode switch on the right.
+#' A navbar page with two tabs, each a Shiny module: Take the test
+#' (\code{mod_test_ui()}) and About (\code{mod_about_ui()}), and a light/dark mode
+#' switch on the right.
 #'
 #' @param request Internal parameter for \code{shiny}. DO NOT REMOVE.
 #' @param keep_alive \code{TRUE} to ping the server every 15 seconds while the page is
@@ -31,7 +31,6 @@ app_ui <- function(request, keep_alive = TRUE) {
       if (keep_alive) div(style = "display:none", textOutput("keep_alive"))
     ),
     bslib::nav_panel("Take the test", mod_test_ui("test")),
-    bslib::nav_panel("CAT", mod_lab_ui("lab")),
     bslib::nav_panel("About", mod_about_ui("about")),
     bslib::nav_spacer(),
     bslib::nav_item(bslib::input_dark_mode(id = "dark_mode"))

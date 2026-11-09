@@ -28,7 +28,6 @@ cat_results(s)
 Other CAT session:
 \code{\link[=cat_answer]{cat_answer()}},
 \code{\link[=cat_item]{cat_item()}},
-\code{\link[=cat_start]{cat_start()}},
-\code{\link[=plot_trajectory]{plot_trajectory()}}
+\code{\link[=cat_start]{cat_start()}}
 }
 \concept{CAT session}

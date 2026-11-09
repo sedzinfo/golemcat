@@ -9,17 +9,16 @@ cat_answer(s, answer)
 \arguments{
 \item{s}{A CAT session.}
 
-\item{answer}{The option chosen, 1 to the number of options of the item, as shown
-to the person (before any reversal or scoring).}
+\item{answer}{The answer, 1 to 5, as shown to the person (before any reversal).}
 }
 \value{
 The updated session.
 }
 \description{
-Scores the answer (category \code{answer - 1}, reversed on a reversed item; on a
-dichotomous item with a key, 1 for the correct option and 0 for any other),
-estimates the ability and its standard error again, and either selects the next item
-of the scale or, when the scale stops, moves to the next scale or ends the test.
+Scores the answer (category \code{answer - 1}, or \code{5 - answer} on a reversed
+item), estimates the ability and its standard error again, and either selects the
+next item of the scale or, when the scale stops, moves to the next scale or ends the
+test.
 }
 \examples{
 s <- cat_start(ipip50()$bank, scales = "Openness")
@@ -30,7 +29,6 @@ s$progress
 Other CAT session:
 \code{\link[=cat_item]{cat_item()}},
 \code{\link[=cat_results]{cat_results()}},
-\code{\link[=cat_start]{cat_start()}},
-\code{\link[=plot_trajectory]{plot_trajectory()}}
+\code{\link[=cat_start]{cat_start()}}
 }
 \concept{CAT session}

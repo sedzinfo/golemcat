@@ -7,8 +7,7 @@
 cat_start(bank, scales = unique(bank$scale), se_threshold = 0.45)
 }
 \arguments{
-\item{bank}{An item bank read with \code{\link{read_questionnaire}} (any model) or
-\code{\link{read_item_bank}} (rating scale model).}
+\item{bank}{An item bank read with \code{\link{read_item_bank}}.}
 
 \item{scales}{The scales to test, in order.}
 
@@ -22,11 +21,10 @@ A CAT session: a list to pass to \code{\link{cat_answer}},
 }
 \description{
 Starts a computerized adaptive test (CAT) over the chosen scales of an item bank,
-one scale at a time, in the order given. Each scale is tested with the engine of its
-IRT model (any of \code{\link{irt_models}}): each next item is the most informative
-one left at the current estimate (maximum Fisher information); after each answer the
-ability is estimated again by EAP, with the normal prior of the scale, over a grid
-of \eqn{\pm 6} prior standard deviations. A scale stops when the
+one scale at a time, in the order given. Within a scale, each next item is the most
+informative one left (\code{\link{next_item_rsm}}); after each answer the ability is
+estimated again by EAP (\code{\link{eap_est_rsm}}), with the normal prior of the
+scale, over a grid of \eqn{\pm 6} prior standard deviations. A scale stops when the
 standard error, divided by the prior standard deviation, is at most
 \code{se_threshold}, or when its items run out; the test then moves to the next scale.
 }
@@ -46,7 +44,6 @@ s$log
 Other CAT session:
 \code{\link[=cat_answer]{cat_answer()}},
 \code{\link[=cat_item]{cat_item()}},
-\code{\link[=cat_results]{cat_results()}},
-\code{\link[=plot_trajectory]{plot_trajectory()}}
+\code{\link[=cat_results]{cat_results()}}
 }
 \concept{CAT session}

@@ -49,20 +49,15 @@ A \code{shiny.appobj}: printed, it starts the app.
 }
 \description{
 Starts the app, an adaptive (CAT) test of the Big Five personality traits with the
-50 statements of the IPIP Big-Five Factor Markers. It has three tabs:
+50 statements of the IPIP Big-Five Factor Markers. It has two tabs:
 \describe{
   \item{Take the test}{The questionnaire as a respondent sees it: one statement at a
     time, and at the end a profile of the five traits, each as a percentile of the
-    calibration sample.}
-  \item{CAT}{An adaptive test with its workings in view, for any questionnaire
-    and six IRT models: choose one of the examples (one per model, see
-    \code{\link{example_questionnaires}}) or upload a csv of your own (see
-    \code{\link{read_questionnaire}}), the scales and the standard error at which
-    each stops, and follow after every answer the estimate and standard error of
-    each scale, the items used, every answer, and a plot of the estimate and
-    standard error step by step.}
+    calibration sample, and a PDF report of the profile.}
   \item{About}{How the test works, the acknowledgments and the references.}
 }
+The workings of an adaptive test, step by step and under six IRT models, are in the CAT
+tab of golemirt (\url{https://sedzinfo-golemirt.share.connect.posit.cloud/}).
 }
 \examples{
 \dontrun{

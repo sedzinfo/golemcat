@@ -11,10 +11,8 @@ cat_item(s)
 }
 \value{
 A list with the \code{scale}, the \code{stem} (\code{NA} when the bank has
-  none), the \code{question}, the answer \code{options} (\code{NULL} for a bank of
-  \code{\link{read_item_bank}}, whose options are the likert), the \code{key}
-  (the correct option of a dichotomous item, or \code{NA}), whether its text is
-  \code{public} and the \code{model} of the current item, or \code{NULL} when the test is done.
+  none) and the \code{question} of the current item, or \code{NULL} when the test is
+  done.
 }
 \description{
 The item to show now
@@ -27,7 +25,6 @@ cat_item(s)
 Other CAT session:
 \code{\link[=cat_answer]{cat_answer()}},
 \code{\link[=cat_results]{cat_results()}},
-\code{\link[=cat_start]{cat_start()}},
-\code{\link[=plot_trajectory]{plot_trajectory()}}
+\code{\link[=cat_start]{cat_start()}}
 }
 \concept{CAT session}

@@ -1,5 +1,5 @@
 Package: golemcat
-Title: Computerized Adaptive Testing of the Big Five and of Any Questionnaire
+Title: Computerized Adaptive Testing of the Big Five with the Rating Scale Model
 Version: 0.0.0.9000
 Authors@R: person("Dimitrios", "Zacharatos", email = "dzacharatos@yahoo.com", role = c("aut", "cre"))
 Maintainer: Dimitrios Zacharatos <dzacharatos@yahoo.com>
@@ -8,14 +8,11 @@ Description: A 'shiny' application, built as a 'golem' package, that gives the
     adaptive test (CAT). Each trait is scored with the rating scale model,
     the next statement is the one with the most Fisher information at the
     current expected a posteriori (EAP) estimate, and a trait stops when its
-    standard error reaches a threshold. One tab is the questionnaire as a
-    respondent sees it, with a profile of the five traits at the end; another
-    shows the workings of the CAT after every answer, for any questionnaire
-    given as a csv file under six item response models (1PL to 4PL, rating
-    scale, partial credit, graded response, modified graded response and
-    nominal response), written straight from a model fitted with 'mirt'. The
-    engines, which give the same results as 'catR', and the session logic are
-    also R functions.
+    standard error reaches a threshold. The app is the questionnaire as a
+    respondent sees it, with a profile of the five traits at the end and a
+    PDF report of it, made with 'typst'. The engine, which gives the same
+    results as 'catR', and the session logic are also R functions, and any
+    item bank fitted with the rating scale model of 'mirt' can be read.
 License: GPL-3
 URL: https://github.com/sedzinfo/golemcat
 BugReports: https://github.com/sedzinfo/golemcat/issues
@@ -25,7 +22,6 @@ Imports:
     bslib (>= 0.6.0),
     config,
     golem,
-    plotly,
     shiny,
     stats,
     utils

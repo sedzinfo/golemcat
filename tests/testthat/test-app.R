@@ -1,11 +1,13 @@
-test_that("the page has the three tabs and the dark mode switch", {
+test_that("the page has the two tabs, the dark mode switch and the link to the CAT of golemirt", {
   html <- htmltools::renderTags(app_ui(NULL))$html
-  for (tab in c("Take the test", "CAT", "About")) {
+  for (tab in c("Take the test", "About")) {
     expect_match(html, paste0("data-value=\"", tab, "\""), fixed = TRUE)
   }
   expect_match(html, "bslib-input-dark-mode", fixed = TRUE)
   expect_match(html, "Acknowledgments", fixed = TRUE)
   expect_match(html, "International Personality Item Pool", fixed = TRUE)
+  expect_no_match(html, "data-value=\"CAT\"", fixed = TRUE)
+  expect_match(html, "https://sedzinfo-golemirt.share.connect.posit.cloud/", fixed = TRUE)
 })
 
 test_that("run_app() returns a shiny app with the threshold in the golem options", {

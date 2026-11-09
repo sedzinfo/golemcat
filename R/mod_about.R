@@ -21,12 +21,8 @@ mod_about_ui <- function(id) {
   link <- function(href, text) tags$a(href = href, target = "_blank", rel = "noopener", text, .noWS = "outside")
   references <- c(
     "Andrich, D. (1978). A rating formulation for ordered response categories. Psychometrika, 43(4), 561-573.",
-    "Bock, R. D. (1972). Estimating item parameters and latent ability when responses are scored in two or more nominal categories. Psychometrika, 37(1), 29-51.",
     "Chalmers, R. P. (2012). mirt: A multidimensional item response theory package for the R environment. Journal of Statistical Software, 48(6), 1-29.",
     "Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. Psychological Assessment, 4(1), 26-42.",
-    "Masters, G. N. (1982). A Rasch model for partial credit scoring. Psychometrika, 47(2), 149-174.",
-    "Muraki, E. (1990). Fitting a polytomous item response model to Likert-type data. Applied Psychological Measurement, 14(1), 59-71.",
-    "Samejima, F. (1969). Estimation of latent ability using a response pattern of graded scores. Psychometrika Monograph Supplement, 17.",
     "Magis, D., & Barrada, J. R. (2017). Computerized adaptive testing with R: Recent updates of the package catR. Journal of Statistical Software, 76(1), 1-19.",
     "van der Linden, W. J., & Glas, C. A. W. (Eds.) (2010). Elements of Adaptive Testing. Springer."
   )
@@ -39,27 +35,22 @@ mod_about_ui <- function(id) {
       strong("golemcat"), " is a computerized adaptive test (CAT) of the Big Five personality",
       " traits. Instead of giving everyone the same 50 statements, it picks after each answer the",
       " statement that tells the most about the person, and moves on from a trait as soon as its",
-      " score is precise enough. The ", strong("Take the test"), " tab is the questionnaire as a",
-      " respondent sees it; the ", strong("CAT"), " tab shows what happens behind it:",
-      " the estimate and its standard error after every answer, and how many questions each trait",
-      " needed."
+      " score is precise enough. At the end it shows a profile of the five traits, which can be",
+      " downloaded as a PDF report."
     ),
     p(
-      "The ", strong("CAT"), " tab is not limited to the Big Five: it runs any questionnaire",
-      " given as a csv file, under six item response models: the 4PL family for right/wrong",
-      " items, and the rating scale, partial credit, graded response, modified graded response",
-      " and nominal response models for items with several options. It comes with an example",
-      " of each, which can be downloaded to see the format."
+      "To see what happens behind the test, the estimate and its standard error after every",
+      " answer, under the rating scale model and five other IRT models, open the ",
+      strong("CAT"), " tab of ", link("https://sedzinfo-golemirt.share.connect.posit.cloud/", "golemirt"),
+      ", an app for learning item response theory."
     ),
     h3("How it works", class = "mt-4"),
     p(
-      "The test tab scores each trait with the rating scale model (Andrich, 1978); the CAT tab",
-      " also offers the partial credit (Masters, 1982), graded response (Samejima, 1969), modified",
-      " graded response (Muraki, 1990), nominal response (Bock, 1972) and 1PL to 4PL models. After every answer the",
+      "Each trait is scored with the rating scale model (Andrich, 1978). After every answer the",
       " score is estimated by expected a posteriori (EAP) estimation, the next statement is the one",
       " with the most Fisher information at that estimate, and a trait stops when its standard",
       " error falls below the chosen threshold or its statements run out. The engine gives the",
-      " same results as the catR package for every model, and the scores the same as mirt's EAP scores."
+      " same results as the catR package, and the scores the same as mirt's EAP scores."
     ),
     h3("Acknowledgments", class = "mt-4"),
     p(
@@ -74,10 +65,6 @@ mod_about_ui <- function(id) {
       ", which publishes its anonymous data for research and teaching. The comparison group of",
       " the results is that sample: people who took the test online, not a representative sample",
       " of any population."
-    ),
-    p(
-      "The right/wrong and nominal examples use the SAT12 science test that comes with mirt:",
-      " the answers of 600 students to 32 multiple-choice questions, whose texts are not public."
     ),
     p(
       "The models were fitted with ", link("https://cran.r-project.org/package=mirt", "mirt"),

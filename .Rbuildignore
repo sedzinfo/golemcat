@@ -12,5 +12,4 @@
 ^\.rscignore$
 ^rsconnect$
 ^manifest\.json$
-^data-raw$
 ^screenshots$

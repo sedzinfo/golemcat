@@ -59,21 +59,5 @@ test_that("cat_results() gives percentiles, and bad input is refused", {
   expect_gt(r$percentile, 50)
   expect_error(cat_start(q$bank, "Honesty"), "not in the item bank")
   expect_error(cat_start(q$bank, character(0)), "at least one scale")
-  expect_error(cat_answer(cat_start(q$bank, "Openness"), 6), "from 1 to 5")
-})
-
-test_that("plot_trajectory() draws a plotly chart, one trace per trait in each panel", {
-  s <- cat_start(q$bank, c("Openness", "Extraversion"), 0.6)
-  while (s$stage == "testing") s <- cat_answer(s, 2)
-  p <- plot_trajectory(s)
-  expect_s3_class(p, "plotly")
-  b <- plotly::plotly_build(p)$x
-  expect_length(b$data, 5) # 2 traits x (theta, SE), and the stopping SE
-  points <- Filter(function(t) !identical(t$name, "stopping SE"), b$data)
-  expect_equal(sum(unlist(lapply(points, function(t) length(t$x)))), 2 * nrow(s$log))
-  stop_line <- Filter(function(t) identical(t$name, "stopping SE"), b$data)[[1]]
-  expect_equal(unique(stop_line$y), 0.6)
-  # dark mode: light text
-  expect_equal(plotly::plotly_build(plot_trajectory(s, dark = TRUE))$x$layout$font$color, "#dee2e6")
-  expect_error(plot_trajectory(cat_start(q$bank, "Openness")), "no answers yet")
+  expect_error(cat_answer(cat_start(q$bank, "Openness"), 6), "must be 1, 2, 3, 4 or 5")
 })
