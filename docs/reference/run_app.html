@@ -75,6 +75,7 @@ tab of golemirt (<a href="https://sedzinfo-golemirt.share.connect.posit.cloud/" 
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">run_app</span><span class="op">(</span></span>
 <span>  se_threshold <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span>  analytics <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  keep_alive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  onStart <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -92,6 +93,13 @@ tab of golemirt (<a href="https://sedzinfo-golemirt.share.connect.posit.cloud/" 
 <dd><p>Standardized standard error at which a trait stops in the Take
 the test tab. The default 0.40 aims at a reliability of about .84 per trait and
 uses about 43 of the 50 statements; 0.45 uses about 36.</p></dd>
+
+
+<dt id="arg-analytics">analytics<a class="anchor" aria-label="anchor" href="#arg-analytics"></a></dt>
+<dd><p><code>TRUE</code> to add Google Analytics, through the cookie banner shared with
+the sites of sedzinfo.github.io, which loads it only after the visitor accepts. Meant for the
+public deployment (see <code>app.R</code>); off by default, so that running the app yourself sends
+nothing.</p></dd>
 
 
 <dt id="arg-keep-alive">keep_alive<a class="anchor" aria-label="anchor" href="#arg-keep-alive"></a></dt>

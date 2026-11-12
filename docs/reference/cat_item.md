@@ -38,6 +38,6 @@ cat_item(s)
 #> [1] "How accurately does this statement describe you?"
 #> 
 #> $question
-#> [1] "I Use difficult words."
+#> [1] "I use difficult words."
 #> 
 ```

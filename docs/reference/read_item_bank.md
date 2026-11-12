@@ -48,10 +48,10 @@ Other item bank:
 bank <- read_item_bank(system.file("extdata", "ipip50_items.csv", package = "golemcat"))
 head(bank[, c("scale", "question", "reverse", "lambdaj")])
 #>           scale                                        question reverse      lambdaj
-#> 1 Agreeableness                     I Make people feel at ease.   FALSE  0.005745269
-#> 2 Agreeableness               I Feel little concern for others.    TRUE  0.000000000
-#> 3 Agreeableness                      I Am interested in people.   FALSE -0.276373167
-#> 4 Agreeableness                                I Insult people.    TRUE -0.168629507
-#> 5 Agreeableness             I Sympathize with others' feelings.   FALSE -0.408719449
-#> 6 Agreeableness I Am not interested in other people's problems.    TRUE -0.164829510
+#> 1 Agreeableness                     I make people feel at ease.   FALSE  0.005745269
+#> 2 Agreeableness               I feel little concern for others.    TRUE  0.000000000
+#> 3 Agreeableness                      I am interested in people.   FALSE -0.276373167
+#> 4 Agreeableness                                I insult people.    TRUE -0.168629507
+#> 5 Agreeableness             I sympathize with others' feelings.   FALSE -0.408719449
+#> 6 Agreeableness I am not interested in other people's problems.    TRUE -0.164829510
 ```

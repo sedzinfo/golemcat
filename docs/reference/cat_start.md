@@ -67,8 +67,8 @@ cat_results(s)
 #> 1 Extraversion 0.3236773 0.4318709   62.69088        4    10 completed
 s$log
 #>   step        scale                                        question answer     theta        se
-#> 1    1 Extraversion I Talk to a lot of different people at parties.      4 0.5714096 0.7170862
-#> 2    2 Extraversion                    I Am quiet around strangers.      4 0.2657205 0.5712175
-#> 3    3 Extraversion                     I Am the life of the party.      4 0.5382870 0.4896811
-#> 4    4 Extraversion       I Don't like to draw attention to myself.      4 0.3236773 0.4318709
+#> 1    1 Extraversion I talk to a lot of different people at parties.      4 0.5714096 0.7170862
+#> 2    2 Extraversion                    I am quiet around strangers.      4 0.2657205 0.5712175
+#> 3    3 Extraversion                     I am the life of the party.      4 0.5382870 0.4896811
+#> 4    4 Extraversion       I don't like to draw attention to myself.      4 0.3236773 0.4318709
 ```

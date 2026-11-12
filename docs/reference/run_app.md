@@ -23,6 +23,7 @@ are in the CAT tab of golemirt
 ``` r
 run_app(
   se_threshold = 0.4,
+  analytics = FALSE,
   keep_alive = TRUE,
   onStart = NULL,
   options = list(),
@@ -39,6 +40,13 @@ run_app(
   Standardized standard error at which a trait stops in the Take the
   test tab. The default 0.40 aims at a reliability of about .84 per
   trait and uses about 43 of the 50 statements; 0.45 uses about 36.
+
+- analytics:
+
+  `TRUE` to add Google Analytics, through the cookie banner shared with
+  the sites of sedzinfo.github.io, which loads it only after the visitor
+  accepts. Meant for the public deployment (see `app.R`); off by
+  default, so that running the app yourself sends nothing.
 
 - keep_alive:
 
