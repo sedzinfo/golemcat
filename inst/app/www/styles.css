@@ -8,3 +8,41 @@
 div:has(> a[href="#cookie-settings"]) {
   margin-top: 2rem;
 }
+
+/* phones and other touch screens: bigger tap targets (desktop with a mouse is not affected) */
+@media (max-width: 767.98px), (hover: none) and (pointer: coarse) {
+  /* each answer of the test is a full-width row at least 40px tall; long answers wrap beside the radio */
+  .shiny-input-radiogroup .radio label {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 40px;
+    padding-block: 8px;
+  }
+  .shiny-input-radiogroup .radio input[type="radio"] {
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+  /* the Cookie settings and Privacy links of the footer */
+  div:has(> a[href="#cookie-settings"]) > a {
+    display: inline-block;
+    padding: 10px 4px;
+  }
+  /* the light/dark switch of the navbar: 40px instead of 29px (its padding is --size-xxs, 0.25rem) */
+  #dark_mode {
+    --size-xxs: .6rem;
+  }
+  /* the Reject and Accept buttons of the cookie banner: two wide buttons */
+  #analytics-choice .btn {
+    flex: 1 1 0;
+    min-height: 40px;
+  }
+}
+
+/* phones: while the cookie banner is open, room below the page lets the Start and Next buttons
+   scroll above the banner instead of staying under it */
+@media (max-width: 767.98px) {
+  body:has(> #analytics-choice:not(.d-none)) {
+    padding-bottom: 13rem;
+  }
+}

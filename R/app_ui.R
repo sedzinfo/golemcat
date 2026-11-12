@@ -31,6 +31,14 @@ app_ui <- function(request, analytics = FALSE, keep_alive = TRUE) {
     fillable = FALSE,
     header = tagList(
       add_external_resources(analytics, keep_alive),
+      # phones: the collapsed menu of the navbar closes once a tab is chosen, so the tab is
+      # not hidden under the open menu (CSS cannot close it; desktop has no collapsed menu)
+      tags$script(HTML(
+        "document.addEventListener('click', function (e) {
+          var link = e.target.closest('.navbar-collapse.show .nav-link');
+          if (link) bootstrap.Collapse.getOrCreateInstance(link.closest('.navbar-collapse')).hide();
+        });"
+      )),
       if (keep_alive) div(style = "display:none", textOutput("keep_alive"))
     ),
     bslib::nav_panel("Take the test", mod_test_ui("test")),
