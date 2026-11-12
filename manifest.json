@@ -452,31 +452,26 @@
         "Package": "beepr",
         "Type": "Package",
         "Title": "Easily Play Notification Sounds on any Platform",
-        "Version": "2.0",
+        "Version": "2.0.1",
         "Encoding": "UTF-8",
-        "Date": "2024-07-06",
+        "Date": "2026-11-02",
         "Authors@R": "c(\n    person(\"Rasmus\", \"Bååth\", email = \"rasmus.baath@gmail.com\", role = c(\"aut\", \"cre\")), \n    person(\"Amanda\", \"Dobbyn\", email = \"amanda.e.dobbyn@gmail.com\", role = \"ctb\"))",
         "Description": "The main function of this package is beep(), with the purpose to\n    make it easy to play notification sounds on whatever platform you are on.\n    It is intended to be useful, for example, if you are running a long analysis\n    in the background and want to know when it is ready.",
         "License": "GPL-3",
         "URL": "https://github.com/rasmusab/beepr",
         "BugReports": "https://github.com/rasmusab/beepr/issues",
+        "Depends": "R (>= 3.5.0)",
         "Imports": "audio",
-        "RoxygenNote": "7.3.1",
         "Suggests": "testthat (>= 3.0.0)",
         "Config/testthat/edition": "3",
+        "Config/roxygen2/version": "8.1.1",
         "NeedsCompilation": "no",
-        "Packaged": "2024-07-06 20:37:40 UTC; rasmus",
+        "Packaged": "2026-11-03 11:49:02 UTC; rasmus.b",
         "Author": "Rasmus Bååth [aut, cre],\n  Amanda Dobbyn [ctb]",
         "Maintainer": "Rasmus Bååth <rasmus.baath@gmail.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2024-07-06 21:12:02 UTC",
-        "Built": "R 4.6.0; ; 2026-05-04 09:31:50 UTC; unix",
-        "RemoteType": "standard",
-        "RemotePkgRef": "beepr",
-        "RemoteRef": "beepr",
-        "RemoteRepos": "https://cloud.r-project.org",
-        "RemotePkgPlatform": "source",
-        "RemoteSha": "2.0"
+        "Date/Publication": "2026-11-06 16:30:15 UTC",
+        "Built": "R 4.6.2; ; 2026-11-12 07:59:57 UTC; unix"
       }
     },
     "brio": {
@@ -602,8 +597,8 @@
       "description": {
         "Package": "charport",
         "Title": "ALTREP String Interoperability",
-        "Version": "0.1.1",
-        "Date": "2026-09-18",
+        "Version": "0.2.0",
+        "Date": "2026-11-06",
         "Authors@R": "c(\n    person(\"Travers\", \"Ching\", email = \"traversc@gmail.com\", role = c(\"aut\", \"cre\", \"cph\")),\n    person(\"R Consortium\", role = \"fnd\",\n           comment = \"Infrastructure Steering Committee grant: Universal ALTREP Interoperability for Strings\"))",
         "Description": "Provides infrastructure for interoperable ALTREP character vectors.\n    Producers of ALTREP string classes can register access methods,\n    allowing consumers to read supported character vectors through\n    a common interface without materializing them as ordinary R strings.\n    Also provides 'charvec', a reference ALTREP string implementation backed\n    by stable memory slices, with support for efficient and multithreaded\n    construction.",
         "License": "MIT + file LICENSE",
@@ -614,15 +609,15 @@
         "Depends": "R (>= 3.6.0)",
         "URL": "https://github.com/charbase/charport,\nhttps://charbase.github.io/charport/",
         "BugReports": "https://github.com/charbase/charport/issues",
-        "Config/roxygen2/version": "8.0.0",
+        "Config/roxygen2/version": "8.1.0",
         "Config/Needs/website": "pkgdown, xml2",
         "NeedsCompilation": "yes",
-        "Packaged": "2026-09-19 06:05:06 UTC; tedai",
+        "Packaged": "2026-11-06 08:55:06 UTC; tedvm",
         "Author": "Travers Ching [aut, cre, cph],\n  R Consortium [fnd] (Infrastructure Steering Committee grant: Universal\n    ALTREP Interoperability for Strings)",
         "Maintainer": "Travers Ching <traversc@gmail.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2026-09-21 10:00:28 UTC",
-        "Built": "R 4.6.2; x86_64-pc-linux-gnu; 2026-11-04 07:47:17 UTC; unix"
+        "Date/Publication": "2026-11-06 10:40:02 UTC",
+        "Built": "R 4.6.2; x86_64-pc-linux-gnu; 2026-11-12 07:59:58 UTC; unix"
       }
     },
     "class": {
@@ -932,7 +927,7 @@
         "Type": "Package",
         "Title": "Diffs for R Objects",
         "Description": "Generate a colorized diff of two R objects for an intuitive\n    visualization of their differences.",
-        "Version": "0.3.9",
+        "Version": "0.3.10",
         "Authors@R": "c(\n    person(\n    \"Brodie\", \"Gaslam\", email=\"brodie.gaslam@yahoo.com\",\n    role=c(\"aut\", \"cre\")),\n    person(\n    \"Michael B.\", \"Allen\", email=\"ioplex@gmail.com\",\n    role=c(\"ctb\", \"cph\"),\n    comment=\"Original C implementation of Myers Diff Algorithm\"))",
         "Depends": "R (>= 4.1.0)",
         "License": "GPL-2 | GPL-3",
@@ -945,17 +940,12 @@
         "Imports": "crayon (>= 1.3.2), tools, methods, utils, stats",
         "Config/roxygen2/version": "8.0.0",
         "NeedsCompilation": "yes",
-        "Packaged": "2026-09-11 17:57:42 UTC; brodie",
+        "Packaged": "2026-11-09 17:19:48 UTC; brodie",
         "Author": "Brodie Gaslam [aut, cre],\n  Michael B. Allen [ctb, cph] (Original C implementation of Myers Diff\n    Algorithm)",
         "Maintainer": "Brodie Gaslam <brodie.gaslam@yahoo.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2026-09-11 21:00:16 UTC",
-        "Built": "R 4.6.1; x86_64-pc-linux-gnu; 2026-09-17 06:54:35 UTC; unix",
-        "RemoteType": "standard",
-        "RemotePkgRef": "diffobj",
-        "RemoteRef": "diffobj",
-        "RemoteRepos": "https://cloud.r-project.org",
-        "RemoteSha.Version": "0.3.9"
+        "Date/Publication": "2026-11-10 08:50:08 UTC",
+        "Built": "R 4.6.2; x86_64-pc-linux-gnu; 2026-11-12 08:01:09 UTC; unix"
       }
     },
     "digest": {
@@ -1817,26 +1807,25 @@
       "description": {
         "Package": "otel",
         "Title": "OpenTelemetry R API",
-        "Version": "0.2.0",
+        "Version": "0.3.0",
         "Authors@R": "\n    person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\"))",
         "Description": "High-quality, ubiquitous, and portable telemetry to enable\n    effective observability. OpenTelemetry is a collection of tools,\n    APIs, and SDKs used to instrument, generate, collect, and export\n    telemetry data (metrics, logs, and traces) for analysis in order to\n    understand your software's performance and behavior.\n    This package implements the OpenTelemetry API:\n    <https://opentelemetry.io/docs/specs/otel/>.\n    Use this package as a dependency if you want to instrument your R\n    package for OpenTelemetry.",
         "License": "MIT + file LICENSE",
         "Encoding": "UTF-8",
-        "RoxygenNote": "7.3.2.9000",
         "Depends": "R (>= 3.6.0)",
-        "Suggests": "callr, cli, glue, jsonlite, otelsdk, processx, shiny,\nspelling, testthat (>= 3.0.0), utils, withr",
+        "Suggests": "callr, cli, glue, jsonlite, otelsdk (>= 0.2.4), processx,\nshiny, spelling, testthat (>= 3.0.0), utils, withr",
         "Config/Needs/website": "tidyverse/tidytemplate",
         "Config/testthat/edition": "3",
         "URL": "https://otel.r-lib.org, https://github.com/r-lib/otel",
-        "Additional_repositories": "https://github.com/r-lib/otelsdk/releases/download/devel",
         "BugReports": "https://github.com/r-lib/otel/issues",
+        "Config/roxygen2/version": "8.1.1",
         "NeedsCompilation": "no",
-        "Packaged": "2025-08-29 12:46:28 UTC; gaborcsardi",
+        "Packaged": "2026-11-07 14:37:49 UTC; gaborcsardi",
         "Author": "Gábor Csárdi [aut, cre]",
         "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2025-08-29 13:30:07 UTC",
-        "Built": "R 4.6.0; ; 2026-05-04 09:22:57 UTC; unix"
+        "Date/Publication": "2026-11-07 15:20:02 UTC",
+        "Built": "R 4.6.2; ; 2026-11-12 08:01:35 UTC; unix"
       }
     },
     "parallelly": {
@@ -1901,32 +1890,28 @@
       "description": {
         "Package": "permute",
         "Title": "Functions for Generating Restricted Permutations of Data",
-        "Version": "0.9-10",
+        "Version": "0.10-0",
         "Authors@R": "c(person(given = \"Gavin L.\", family = \"Simpson\",\n                    email = \"ucfagls@gmail.com\",\n                    role = c(\"aut\", \"cph\", \"cre\"),\n\t\t                comment = c(ORCID = \"0000-0002-9084-8413\")),\n             person(given = \"R Core Team\", role = \"cph\"),\n             person(given = \"Douglas M.\", family = \"Bates\", role = \"ctb\"),\n             person(given = \"Jari\", family = \"Oksanen\", role = \"ctb\"))",
         "Depends": "R (>= 3.6.0)",
         "Imports": "stats",
-        "Suggests": "vegan (>= 2.0-0), testthat (>= 0.5), parallel, knitr,\nrmarkdown, bookdown, sessioninfo",
+        "Suggests": "vegan (>= 2.0-0), testthat (>= 3.1.5), parallel, knitr,\nrmarkdown, bookdown, sessioninfo",
         "Description": "A set of restricted permutation designs for freely exchangeable, line transects (time series), and spatial grid designs plus permutation of blocks (groups of samples) is provided. 'permute' also allows split-plot designs, in which the whole-plots or split-plots or both can be freely-exchangeable or one of the restricted designs. The 'permute' package is modelled after the permutation schemes of 'Canoco 3.1' (and later) by Cajo ter Braak.",
         "License": "GPL-2",
         "ByteCompile": "true",
-        "URL": "https://github.com/gavinsimpson/permute",
+        "URL": "https://gavinsimpson.github.io/permute/,\nhttps://github.com/gavinsimpson/permute",
         "BugReports": "https://github.com/gavinsimpson/permute/issues",
         "Copyright": "see file COPYRIGHTS",
         "VignetteBuilder": "knitr",
         "Language": "en-GB",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "8.0.0",
         "NeedsCompilation": "no",
-        "Packaged": "2026-02-06 11:02:27 UTC; gavin",
+        "Packaged": "2026-11-06 09:08:02 UTC; gavin",
         "Author": "Gavin L. Simpson [aut, cph, cre] (ORCID:\n    <https://orcid.org/0000-0002-9084-8413>),\n  R Core Team [cph],\n  Douglas M. Bates [ctb],\n  Jari Oksanen [ctb]",
         "Maintainer": "Gavin L. Simpson <ucfagls@gmail.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2026-02-06 11:50:02 UTC",
-        "Built": "R 4.6.0; ; 2026-05-04 09:31:10 UTC; unix",
-        "RemoteType": "standard",
-        "RemotePkgRef": "permute",
-        "RemoteRef": "permute",
-        "RemoteRepos": "https://cloud.r-project.org",
-        "RemotePkgPlatform": "source",
-        "RemoteSha": "0.9-10"
+        "Date/Publication": "2026-11-06 14:00:02 UTC",
+        "Built": "R 4.6.2; ; 2026-11-12 08:02:58 UTC; unix"
       }
     },
     "pillar": {
@@ -2828,7 +2813,7 @@
       "checksum": "84de9cc0ea9c7d485fd4c993ededf1a1"
     },
     "inst/app/www/styles.css": {
-      "checksum": "b3a8e8cb1d9a43275d618983da1ab987"
+      "checksum": "cf6aa5321539dd0bca03599a7d47b66b"
     },
     "inst/extdata/ipip50_items.csv": {
       "checksum": "7a3b1d26c67c85addac22a07468578d5"
@@ -2873,7 +2858,7 @@
       "checksum": "0e2f51c1617f469ccd545823157b91f4"
     },
     "R/app_ui.R": {
-      "checksum": "11d74b6b1364a637e32425b57e49cc97"
+      "checksum": "3cff32565cb17a2a6482692573465521"
     },
     "R/fct_cat.R": {
       "checksum": "7c11db0b07adfc00314832c22bae2ac7"
