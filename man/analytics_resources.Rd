@@ -11,10 +11,10 @@ A \code{tagList} for the head of the page.
 }
 \description{
 Loads the cookie banner shared with the sites of sedzinfo.github.io, which
-loads Google Analytics only after the visitor accepts, and the script that
-reports each tab the visitor opens as a page view
-(\code{inst/app/www/analytics.js}). The stylesheet of the app gives the
-banner the navy of those sites.
+loads Google Analytics only after the visitor accepts (and has the navy of
+those sites), and the script shared by the apps that reports each tab the
+visitor opens as a page view, and the PDF report as a download
+(\code{https://sedzinfo.github.io/shiny/analytics.js}).
 }
 \examples{
 golemcat:::analytics_resources()

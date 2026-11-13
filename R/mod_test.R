@@ -242,7 +242,8 @@ test_results <- function(ns, res, n_items) {
       div(
         class = "d-flex flex-wrap gap-2",
         actionButton(ns("restart"), "Take the test again", class = "btn-outline-primary"),
-        downloadButton(ns("pdf"), "Download PDF report", class = "btn-primary")
+        downloadButton(ns("pdf"), "Download PDF report", class = "btn-primary",
+                       `data-file-extension` = "pdf", `data-link-text` = "PDF report")
       )
     )
   )

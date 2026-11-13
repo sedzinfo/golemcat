@@ -31,7 +31,7 @@ test_that("Google Analytics and its cookie banner are in the page only when aske
   page <- function(analytics) htmltools::renderTags(app_ui(NULL, analytics = analytics))
   with <- page(TRUE)
   expect_match(with$head, "https://sedzinfo.github.io/consent.js", fixed = TRUE)
-  expect_match(with$head, "www/analytics.js", fixed = TRUE)
+  expect_match(with$head, "https://sedzinfo.github.io/shiny/analytics.js", fixed = TRUE)
   expect_match(with$html, "#cookie-settings", fixed = TRUE)
   expect_match(with$html, "https://sedzinfo.github.io/privacy.html", fixed = TRUE)
   without <- page(FALSE)
@@ -39,4 +39,12 @@ test_that("Google Analytics and its cookie banner are in the page only when aske
   expect_no_match(without$html, "cookie-settings", fixed = TRUE)
   # run_app() leaves it off: only the deployed app.R turns it on
   expect_false(formals(run_app)$analytics)
+})
+
+test_that("the files shared by the apps (analytics.js, keep_alive.js) come from sedzinfo.github.io, not from inst/app/www", {
+  head <- htmltools::renderTags(app_ui(NULL, analytics = TRUE, keep_alive = TRUE))$head
+  expect_match(head, "https://sedzinfo.github.io/shiny/analytics.js", fixed = TRUE)
+  expect_no_match(head, "www/analytics.js", fixed = TRUE)
+  expect_match(head, "https://sedzinfo.github.io/shiny/keep_alive.js", fixed = TRUE)
+  expect_no_match(head, "www/keep_alive.js", fixed = TRUE)
 })
