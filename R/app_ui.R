@@ -54,7 +54,8 @@ app_ui <- function(request, analytics = FALSE, keep_alive = TRUE) {
 #' Add external resources to the application
 #'
 #' Serves \code{inst/app/www} at \code{www/} and adds to the head of the page the
-#' favicon, the stylesheet of the app and, when asked, the script that pings the server
+#' favicon, the stylesheet shared by the apps (\code{shared_css()}) and the app's own and,
+#' when asked, the script that pings the server
 #' (\code{keep_alive.js}, shared by the apps on sedzinfo.github.io) and the analytics
 #' scripts. Each file is added by name, so a new file in \code{inst/app/www} must be added
 #' here too.
@@ -69,6 +70,7 @@ add_external_resources <- function(analytics = FALSE, keep_alive = TRUE) {
   addResourcePath("www", app_sys("app/www"))
   tags$head(
     tags$link(rel = "icon", type = "image/svg+xml", href = "www/favicon.svg"),
+    shared_css(),
     tags$link(rel = "stylesheet", href = "www/styles.css"),
     if (keep_alive) tags$script(src = paste0(shared_url, "keep_alive.js")),
     if (analytics) analytics_resources()

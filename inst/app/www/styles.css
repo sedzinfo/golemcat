@@ -1,9 +1,5 @@
-/* the footer with the Cookie settings and Privacy links: more space above it moves it lower */
-div:has(> a[href="#cookie-settings"]) {
-  margin-top: 2rem;
-}
-
-/* phones and other touch screens: bigger tap targets (desktop with a mouse is not affected) */
+/* phones and other touch screens: bigger tap targets (desktop with a mouse is not affected); those
+   of every app (the footer links, the light/dark switch) are in apps.css, shared by the apps */
 @media (max-width: 767.98px), (hover: none) and (pointer: coarse) {
   /* each answer of the test is a full-width row at least 40px tall; long answers wrap beside the radio */
   .shiny-input-radiogroup .radio label {
@@ -16,15 +12,6 @@ div:has(> a[href="#cookie-settings"]) {
   .shiny-input-radiogroup .radio input[type="radio"] {
     flex-shrink: 0;
     margin-top: 0;
-  }
-  /* the Cookie settings and Privacy links of the footer */
-  div:has(> a[href="#cookie-settings"]) > a {
-    display: inline-block;
-    padding: 10px 4px;
-  }
-  /* the light/dark switch of the navbar: 40px instead of 29px (its padding is --size-xxs, 0.25rem) */
-  #dark_mode {
-    --size-xxs: .6rem;
   }
 }
 
