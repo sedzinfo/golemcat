@@ -190,7 +190,3 @@ engine follows [catR](https://cran.r-project.org/package=catR).
   Software*, 76(1), 1-19.
 - van der Linden, W. J., & Glas, C. A. W. (Eds.) (2010). *Elements of
   Adaptive Testing*. Springer.
-
-## License
-
-GPL-3.
