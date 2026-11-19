@@ -1,0 +1,21 @@
+# How to cite this package. GitHub shows it as "Cite this repository"; Zenodo uses it for the DOI of each release.
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "golemcat: Computerized Adaptive Testing of the Big Five with the Rating Scale Model"
+abstract: "A 'shiny' application, built as a 'golem' package, that gives the 50 statements of the IPIP Big-Five Factor Markers as a computerized adaptive test (CAT). Each trait is scored with the rating scale model, the next statement is the one with the most Fisher information at the current expected a posteriori (EAP) estimate, and a trait stops when its standard error reaches a threshold. The app is the questionnaire as a respondent sees it, with a profile of the five traits at the end and a PDF report of it, made with 'typst'. The engine, which gives the same results as 'catR', and the session logic are also R functions, and any item bank fitted with the rating scale model of 'mirt' can be read."
+authors:
+  - family-names: "Zacharatos"
+    given-names: "Dimitrios"
+    orcid: "https://orcid.org/0000-0003-1789-8294"
+license: GPL-3.0-only
+repository-code: "https://github.com/sedzinfo/golemcat"
+url: "https://sedzinfo.github.io/golemcat/"
+keywords:
+  - "golem"
+  - "shiny"
+  - "big-five"
+  - "computerized-adaptive-testing"
+  - "item-response-theory"
+  - "personality-test"
+  - "psychometrics"

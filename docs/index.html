@@ -279,9 +279,38 @@
 
   </aside>
 </div>
-
-
-    <footer><div class="pkgdown-footer-left">
+<!-- Above: pkgdown's own content-home.html. Below: structured data (JSON-LD) for search engines, on the
+     home page only. Check it at https://search.google.com/test/rich-results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "golemcat",
+  "alternateName": "Computerized Adaptive Testing of the Big Five with the Rating Scale Model",
+  "description": "A 'shiny' application, built as a 'golem' package, that gives the 50 statements of the IPIP Big-Five Factor Markers as a computerized adaptive test (CAT). Each trait is scored with the rating scale model, the next statement is the one with the most Fisher information at the current expected a posteriori (EAP) estimate, and a trait stops when its standard error reaches a threshold. The app is the questionnaire as a respondent sees it, with a profile of the five traits at the end and a PDF report of it, made with 'typst'. The engine, which gives the same results as 'catR', and the session logic are also R functions, and any item bank fitted with the rating scale model of 'mirt' can be read.",
+  "url": "https://sedzinfo-golemcat.share.connect.posit.cloud/",
+  "mainEntityOfPage": "https://sedzinfo.github.io/golemcat/",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "isAccessibleForFree": true,
+  "sameAs": "https://github.com/sedzinfo/golemcat",
+  "image": "https://sedzinfo.github.io/golemcat/card.png",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "author": {
+    "@type": "Person",
+    "@id": "https://sedzinfo.github.io/#person",
+    "name": "Dimitrios Zacharatos",
+    "url": "https://sedzinfo.github.io/",
+    "sameAs": ["https://github.com/sedzinfo", "https://orcid.org/0000-0003-1789-8294"]
+  }
+}
+</script><footer><div class="pkgdown-footer-left">
   <p><a href="https://github.com/sedzinfo" class="external-link">github.com/sedzinfo</a> · <a href="#cookie-settings">Cookie settings</a></p>
 </div>
 
