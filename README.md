@@ -1,6 +1,8 @@
 # golemcat: an adaptive Big Five personality test
 
-**[Open the live app](https://sedzinfo-golemcat.share.connect.posit.cloud/)** · [Website](https://sedzinfo.github.io/golemcat/)
+**[Open the live app](https://sedzinfo-golemcat.share.connect.posit.cloud/)** · [Help pages](https://sedzinfo.github.io/golemcat/reference/)
+
+## What it does
 
 **golemcat** is an R package with a [Shiny](https://shiny.posit.co/) app, built with
 [golem](https://thinkr-open.github.io/golem/), that gives the 50 statements of the IPIP
@@ -36,22 +38,24 @@ file.
 The engine gives the same results as [catR](https://cran.r-project.org/package=catR), which the
 tests check.
 
-## Screenshots
-
-The profile at the end of the test, with the PDF report:
-
-![Take the test: the profile](man/figures/golemcat1.png)
-
 ## Installation
 
-### Prerequisites
+### 1. Install R
 
-1. **Install R** (version 4.1 or higher): https://cran.r-project.org/
-2. **Install RStudio** (optional but recommended): https://posit.co/downloads/
+Download R 4.1 or newer from [CRAN](https://cran.r-project.org/), for Windows, macOS or Linux, and run the installer.
 
-### Package Installation
+### 2. Install RStudio or Positron
 
-Open RStudio (or an R console) and run:
+An editor makes R easier to use. It is optional, and both are free, from Posit:
+
+- [RStudio Desktop](https://posit.co/download/rstudio-desktop/)
+- [Positron](https://positron.posit.co/download.html), which also runs Python
+
+### 3. Install golemcat
+
+Run one of these in RStudio, Positron or the R console. Each one also installs the packages golemcat needs.
+
+#### From R-universe (recommended)
 
 ```r
 install.packages(
@@ -60,24 +64,35 @@ install.packages(
 )
 ```
 
-[R-universe](https://sedzinfo.r-universe.dev/golemcat) builds golemcat from this repository, and CRAN provides the packages it needs.
+[R-universe](https://sedzinfo.r-universe.dev/golemcat) builds golemcat from this repository after every change, ready to install on Windows, macOS and Linux, and CRAN provides the packages it needs.
 
-To install from GitHub instead:
+#### From GitHub
 
 ```r
-# Install devtools if you haven't already
-install.packages("devtools")
-# Install golemcat from GitHub
-devtools::install_github("sedzinfo/golemcat")
+install.packages("pak")   # once
+pak::pak("sedzinfo/golemcat")
 ```
 
-Or install the source tarball of the [latest release](https://github.com/sedzinfo/golemcat/releases/tag/latest), which is rebuilt from `main` on every change, together with the PDF manual:
+#### From the release tarball
+
+The [latest release](https://github.com/sedzinfo/golemcat/releases/tag/latest) has the source tarball and the PDF manual, rebuilt from `main` on every change:
 
 ```r
-install.packages(
-  "https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz",
-  repos = NULL, type = "source"
-)
+install.packages("pak")   # once
+pak::pak("url::https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz")
+```
+
+#### From a clone of the repository
+
+This repository keeps no files in [Git LFS](https://git-lfs.com), so a plain clone with [Git](https://git-scm.com/downloads) has everything:
+
+```bash
+git clone https://github.com/sedzinfo/golemcat.git
+```
+
+```r
+install.packages("pak")   # once
+pak::local_install("path/to/golemcat")
 ```
 
 The PDF report of the app needs [typst](https://typst.app) or [quarto](https://quarto.org) installed.
@@ -107,6 +122,12 @@ report_pdf(cat_results(s), "profile.pdf", q$bank) # needs typst or quarto
 Any questionnaire fitted with the rating scale model of `mirt` (`itemtype = "rsm"`) can be
 read with `read_item_bank()` and `read_likert()`; `validate_item_bank_against_mirt()` checks
 the bank against the fitted model, item by item.
+
+## Screenshots
+
+The profile at the end of the test, with the PDF report:
+
+![Take the test: the profile](man/figures/golemcat1.png)
 
 ## Calibration
 

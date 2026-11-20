@@ -1,8 +1,10 @@
 # golemcat: an adaptive Big Five personality test
 
 **[Open the live
-app](https://sedzinfo-golemcat.share.connect.posit.cloud/)** ·
-[Website](https://sedzinfo.github.io/golemcat/)
+app](https://sedzinfo-golemcat.share.connect.posit.cloud/)** · [Help
+pages](https://sedzinfo.github.io/golemcat/reference/)
+
+## What it does
 
 **golemcat** is an R package with a [Shiny](https://shiny.posit.co/)
 app, built with [golem](https://thinkr-open.github.io/golem/), that
@@ -45,41 +47,58 @@ given as a csv file.
 The engine gives the same results as
 [catR](https://cran.r-project.org/package=catR), which the tests check.
 
-## Screenshots
-
-The profile at the end of the test, with the PDF report:
-
-![Take the test: the profile](reference/figures/golemcat1.png)
-
-Take the test: the profile
-
 ## Installation
 
-### Prerequisites
+### 1. Install R
 
-1.  **Install R** (version 4.1 or higher): <https://cran.r-project.org/>
-2.  **Install RStudio** (optional but recommended):
-    <https://posit.co/downloads/>
+Download R 4.1 or newer from [CRAN](https://cran.r-project.org/), for
+Windows, macOS or Linux, and run the installer.
 
-### Package Installation
+### 2. Install RStudio or Positron
 
-Open RStudio (or an R console) and run:
+An editor makes R easier to use. It is optional, and both are free, from
+Posit:
+
+- [RStudio Desktop](https://posit.co/download/rstudio-desktop/)
+- [Positron](https://positron.posit.co/download.html), which also runs
+  Python
+
+### 3. Install golemcat
+
+Run one of these in RStudio, Positron or the R console. Each one also
+installs the packages golemcat needs.
+
+#### From R-universe (recommended)
 
 [`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(`` `` ``"golemcat"``,`` `` repos ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"https://sedzinfo.r-universe.dev"``, ``"https://cloud.r-project.org"``)`` ``)`
 
 [R-universe](https://sedzinfo.r-universe.dev/golemcat) builds golemcat
-from this repository, and CRAN provides the packages it needs.
+from this repository after every change, ready to install on Windows,
+macOS and Linux, and CRAN provides the packages it needs.
 
-To install from GitHub instead:
+#### From GitHub
 
-`# Install devtools if you haven't already`` `[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"devtools"``)`` ``# Install golemcat from GitHub`` ``devtools``::`[`install_github`](https://devtools.r-lib.org/reference/install-deprecated.html)`(``"sedzinfo/golemcat"``)`
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"pak"``)`` ``# once`` ``pak``::`[`pak`](https://pak.r-lib.org/reference/pak.html)`(``"sedzinfo/golemcat"``)`
 
-Or install the source tarball of the [latest
-release](https://github.com/sedzinfo/golemcat/releases/tag/latest),
-which is rebuilt from `main` on every change, together with the PDF
-manual:
+#### From the release tarball
 
-[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(`` `` ``"https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz"``,`` `` repos ``=`` ``NULL``, type ``=`` ``"source"`` ``)`
+The [latest
+release](https://github.com/sedzinfo/golemcat/releases/tag/latest) has
+the source tarball and the PDF manual, rebuilt from `main` on every
+change:
+
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"pak"``)`` ``# once`` ``pak``::`[`pak`](https://pak.r-lib.org/reference/pak.html)`(``"url::https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz"``)`
+
+#### From a clone of the repository
+
+This repository keeps no files in [Git LFS](https://git-lfs.com), so a
+plain clone with [Git](https://git-scm.com/downloads) has everything:
+
+``` bash
+git clone https://github.com/sedzinfo/golemcat.git
+```
+
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"pak"``)`` ``# once`` ``pak``::`[`local_install`](https://pak.r-lib.org/reference/local_install.html)`(``"path/to/golemcat"``)`
 
 The PDF report of the app needs [typst](https://typst.app) or
 [quarto](https://quarto.org) installed.
@@ -100,6 +119,14 @@ and
 [`read_likert()`](https://sedzinfo.github.io/golemcat/reference/read_likert.md);
 [`validate_item_bank_against_mirt()`](https://sedzinfo.github.io/golemcat/reference/validate_item_bank_against_mirt.md)
 checks the bank against the fitted model, item by item.
+
+## Screenshots
+
+The profile at the end of the test, with the PDF report:
+
+![Take the test: the profile](reference/figures/golemcat1.png)
+
+Take the test: the profile
 
 ## Calibration
 
