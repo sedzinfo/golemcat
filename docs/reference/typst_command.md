@@ -19,10 +19,5 @@ A list with `cmd`, the program, and `args`, the arguments that go before
 
 ``` r
 golemcat:::typst_command()
-#> $cmd
-#> [1] "/usr/local/bin/typst"
-#> 
-#> $args
-#> character(0)
-#> 
+#> NULL
 ```

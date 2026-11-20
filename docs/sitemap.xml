@@ -1,10 +1,8 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://sedzinfo.github.io/golemcat/404.html</loc></url>
-<url><loc>https://sedzinfo.github.io/golemcat/LICENSE-text.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/authors.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/index.html</loc></url>
-<url><loc>https://sedzinfo.github.io/golemcat/reference/Ii_rsm.html</loc></url>
-<url><loc>https://sedzinfo.github.io/golemcat/reference/Pi_rsm.html</loc></url>
+<url><loc>https://sedzinfo.github.io/golemcat/LICENSE-text.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/analytics_footer.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/analytics_resources.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/cat_answer.html</loc></url>
@@ -14,6 +12,7 @@
 <url><loc>https://sedzinfo.github.io/golemcat/reference/density_function.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/eap_est_rsm.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/eap_se_rsm.html</loc></url>
+<url><loc>https://sedzinfo.github.io/golemcat/reference/Ii_rsm.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/index.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/integrate_cat.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/ipip50.html</loc></url>
@@ -22,6 +21,7 @@
 <url><loc>https://sedzinfo.github.io/golemcat/reference/mod_test_server.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/mod_test_ui.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/next_item_rsm.html</loc></url>
+<url><loc>https://sedzinfo.github.io/golemcat/reference/Pi_rsm.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/read_item_bank.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/read_likert.html</loc></url>
 <url><loc>https://sedzinfo.github.io/golemcat/reference/report_pdf.html</loc></url>

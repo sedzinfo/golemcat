@@ -55,56 +55,43 @@ Take the test: the profile
 
 ## Installation
 
+### Prerequisites
+
+1.  **Install R** (version 4.1 or higher): <https://cran.r-project.org/>
+2.  **Install RStudio** (optional but recommended):
+    <https://posit.co/downloads/>
+
+### Package Installation
+
 Open RStudio (or an R console) and run:
 
-``` r
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(`` `` ``"golemcat"``,`` `` repos ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"https://sedzinfo.r-universe.dev"``, ``"https://cloud.r-project.org"``)`` ``)`
 
-# Install devtools if you haven't already
-install.packages("devtools")
-# Install golemcat from GitHub
-devtools::install_github("sedzinfo/golemcat")
-```
+[R-universe](https://sedzinfo.r-universe.dev/golemcat) builds golemcat
+from this repository, and CRAN provides the packages it needs.
 
-Without devtools, install the source tarball of the [latest
+To install from GitHub instead:
+
+`# Install devtools if you haven't already`` `[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"devtools"``)`` ``# Install golemcat from GitHub`` ``devtools``::`[`install_github`](https://devtools.r-lib.org/reference/install-deprecated.html)`(``"sedzinfo/golemcat"``)`
+
+Or install the source tarball of the [latest
 release](https://github.com/sedzinfo/golemcat/releases/tag/latest),
 which is rebuilt from `main` on every change, together with the PDF
 manual:
 
-``` r
-
-install.packages(
-  "https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz",
-  repos = NULL, type = "source"
-)
-```
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(`` `` ``"https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz"``,`` `` repos ``=`` ``NULL``, type ``=`` ``"source"`` ``)`
 
 The PDF report of the app needs [typst](https://typst.app) or
 [quarto](https://quarto.org) installed.
 
 ## Usage
 
-``` r
-
-library(golemcat)
-run_app()                    # stops each trait at SE 0.40
-run_app(se_threshold = 0.45) # shorter: about 36 of the 50 statements
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`golemcat`](https://sedzinfo.github.io/golemcat/)`)`` `[`run_app`](https://sedzinfo.github.io/golemcat/reference/run_app.md)`(``)`` ``# stops each trait at SE 0.40`` `[`run_app`](https://sedzinfo.github.io/golemcat/reference/run_app.md)`(``se_threshold ``=`` ``0.45``)`` ``# shorter: about 36 of the 50 statements`
 
 The engine and the session logic are also functions, for scripts and
 simulations:
 
-``` r
-
-library(golemcat)
-q <- ipip50()
-s <- cat_start(q$bank, scales = "Extraversion", se_threshold = 0.40)
-while (s$stage == "testing") {
-  cat(cat_item(s)$question, "\n")
-  s <- cat_answer(s, 4) # the answer, 1 to 5
-}
-cat_results(s)
-report_pdf(cat_results(s), "profile.pdf", q$bank) # needs typst or quarto
-```
+[`library`](https://rdrr.io/r/base/library.html)`(`[`golemcat`](https://sedzinfo.github.io/golemcat/)`)`` ``q`` ``<-`` `[`ipip50`](https://sedzinfo.github.io/golemcat/reference/ipip50.md)`(``)`` ``s`` ``<-`` `[`cat_start`](https://sedzinfo.github.io/golemcat/reference/cat_start.md)`(``q``$``bank``, scales ``=`` ``"Extraversion"``, se_threshold ``=`` ``0.40``)`` ``while`` ``(``s``$``stage`` ``==`` ``"testing"``)`` ``{`` `` `[`cat`](https://rdrr.io/r/base/cat.html)`(`[`cat_item`](https://sedzinfo.github.io/golemcat/reference/cat_item.md)`(``s``)``$``question``, ``"\n"``)`` `` ``s`` ``<-`` `[`cat_answer`](https://sedzinfo.github.io/golemcat/reference/cat_answer.md)`(``s``, ``4``)`` ``# the answer, 1 to 5`` ``}`` `[`cat_results`](https://sedzinfo.github.io/golemcat/reference/cat_results.md)`(``s``)`` `[`report_pdf`](https://sedzinfo.github.io/golemcat/reference/report_pdf.md)`(`[`cat_results`](https://sedzinfo.github.io/golemcat/reference/cat_results.md)`(``s``)``, ``"profile.pdf"``, ``q``$``bank``)`` ``# needs typst or quarto`
 
 Any questionnaire fitted with the rating scale model of `mirt`
 (`itemtype = "rsm"`) can be read with
@@ -190,6 +177,15 @@ engine follows [catR](https://cran.r-project.org/package=catR).
   Software*, 76(1), 1-19.
 - van der Linden, W. J., & Glas, C. A. W. (Eds.) (2010). *Elements of
   Adaptive Testing*. Springer.
+
+------------------------------------------------------------------------
+
+[![R-universe](https://sedzinfo.r-universe.dev/golemcat/badges/version)](https://sedzinfo.r-universe.dev/golemcat)
+![Stars](https://img.shields.io/github/stars/sedzinfo/golemcat)![Watchers](https://img.shields.io/github/watchers/sedzinfo/golemcat)![Repo
+Size](https://img.shields.io/github/repo-size/sedzinfo/golemcat)![Open
+Issues](https://img.shields.io/github/issues/sedzinfo/golemcat)![Forks](https://img.shields.io/github/forks/sedzinfo/golemcat)![Last
+Commit](https://img.shields.io/github/last-commit/sedzinfo/golemcat)![Contributors](https://img.shields.io/github/contributors/sedzinfo/golemcat)![License](https://img.shields.io/github/license/sedzinfo/golemcat)![Workflow
+Status](https://img.shields.io/github/actions/workflow/status/sedzinfo/golemcat/build-tarball.yml)![R-CMD-check](https://github.com/sedzinfo/golemcat/actions/workflows/R-CMD-check.yaml/badge.svg)
 
 # Package index
 
