@@ -44,7 +44,25 @@ The profile at the end of the test, with the PDF report:
 
 ## Installation
 
+### Prerequisites
+
+1. **Install R** (version 4.1 or higher): https://cran.r-project.org/
+2. **Install RStudio** (optional but recommended): https://posit.co/downloads/
+
+### Package Installation
+
 Open RStudio (or an R console) and run:
+
+```r
+install.packages(
+  "golemcat",
+  repos = c("https://sedzinfo.r-universe.dev", "https://cloud.r-project.org")
+)
+```
+
+[R-universe](https://sedzinfo.r-universe.dev/golemcat) builds golemcat from this repository, and CRAN provides the packages it needs.
+
+To install from GitHub instead:
 
 ```r
 # Install devtools if you haven't already
@@ -53,7 +71,7 @@ install.packages("devtools")
 devtools::install_github("sedzinfo/golemcat")
 ```
 
-Without devtools, install the source tarball of the [latest release](https://github.com/sedzinfo/golemcat/releases/tag/latest), which is rebuilt from `main` on every change, together with the PDF manual:
+Or install the source tarball of the [latest release](https://github.com/sedzinfo/golemcat/releases/tag/latest), which is rebuilt from `main` on every change, together with the PDF manual:
 
 ```r
 install.packages(
@@ -152,3 +170,17 @@ domain. The calibration data is from the
 - Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. *Psychological Assessment*, 4(1), 26-42.
 - Magis, D., & Barrada, J. R. (2017). Computerized adaptive testing with R: Recent updates of the package catR. *Journal of Statistical Software*, 76(1), 1-19.
 - van der Linden, W. J., & Glas, C. A. W. (Eds.) (2010). *Elements of Adaptive Testing*. Springer.
+
+---
+
+[![R-universe](https://sedzinfo.r-universe.dev/golemcat/badges/version)](https://sedzinfo.r-universe.dev/golemcat)
+![Stars](https://img.shields.io/github/stars/sedzinfo/golemcat)
+![Watchers](https://img.shields.io/github/watchers/sedzinfo/golemcat)
+![Repo Size](https://img.shields.io/github/repo-size/sedzinfo/golemcat)
+![Open Issues](https://img.shields.io/github/issues/sedzinfo/golemcat)
+![Forks](https://img.shields.io/github/forks/sedzinfo/golemcat)
+![Last Commit](https://img.shields.io/github/last-commit/sedzinfo/golemcat)
+![Contributors](https://img.shields.io/github/contributors/sedzinfo/golemcat)
+![License](https://img.shields.io/github/license/sedzinfo/golemcat)
+![Workflow Status](https://img.shields.io/github/actions/workflow/status/sedzinfo/golemcat/build-tarball.yml)
+![R-CMD-check](https://github.com/sedzinfo/golemcat/actions/workflows/R-CMD-check.yaml/badge.svg)

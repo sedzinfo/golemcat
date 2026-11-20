@@ -87,29 +87,52 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<div class="section level3">
+<h3 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Install R</strong> (version 4.1 or higher): <a href="https://cran.r-project.org/" class="external-link uri">https://cran.r-project.org/</a>
+</li>
+<li>
+<strong>Install RStudio</strong> (optional but recommended): <a href="https://posit.co/downloads/" class="external-link uri">https://posit.co/downloads/</a>
+</li>
+</ol>
+</div>
+<div class="section level3">
+<h3 id="package-installation">Package Installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
+</h3>
 <p>Open RStudio (or an R console) and run:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
+<span>  <span class="st">"golemcat"</span>,</span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://sedzinfo.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><a href="https://sedzinfo.r-universe.dev/golemcat" class="external-link">R-universe</a> builds golemcat from this repository, and CRAN provides the packages it needs.</p>
+<p>To install from GitHub instead:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install devtools if you haven't already</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="co"># Install golemcat from GitHub</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install-deprecated.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"sedzinfo/golemcat"</span><span class="op">)</span></span></code></pre></div>
-<p>Without devtools, install the source tarball of the <a href="https://github.com/sedzinfo/golemcat/releases/tag/latest" class="external-link">latest release</a>, which is rebuilt from <code>main</code> on every change, together with the PDF manual:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>Or install the source tarball of the <a href="https://github.com/sedzinfo/golemcat/releases/tag/latest" class="external-link">latest release</a>, which is rebuilt from <code>main</code> on every change, together with the PDF manual:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://github.com/sedzinfo/golemcat/releases/download/latest/golemcat_0.0.0.9000.tar.gz"</span>,</span>
 <span>  repos <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="st">"source"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The PDF report of the app needs <a href="https://typst.app" class="external-link">typst</a> or <a href="https://quarto.org" class="external-link">quarto</a> installed.</p>
 </div>
+</div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sedzinfo.github.io/golemcat/">golemcat</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/run_app.html">run_app</a></span><span class="op">(</span><span class="op">)</span>                    <span class="co"># stops each trait at SE 0.40</span></span>
 <span><span class="fu"><a href="reference/run_app.html">run_app</a></span><span class="op">(</span>se_threshold <span class="op">=</span> <span class="fl">0.45</span><span class="op">)</span> <span class="co"># shorter: about 36 of the 50 statements</span></span></code></pre></div>
 <p>The engine and the session logic are also functions, for scripts and simulations:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sedzinfo.github.io/golemcat/">golemcat</a></span><span class="op">)</span></span>
 <span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ipip50.html">ipip50</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cat_start.html">cat_start</a></span><span class="op">(</span><span class="va">q</span><span class="op">$</span><span class="va">bank</span>, scales <span class="op">=</span> <span class="st">"Extraversion"</span>, se_threshold <span class="op">=</span> <span class="fl">0.40</span><span class="op">)</span></span>
@@ -243,6 +266,8 @@
 <li>Magis, D., &amp; Barrada, J. R. (2017). Computerized adaptive testing with R: Recent updates of the package catR. <em>Journal of Statistical Software</em>, 76(1), 1-19.</li>
 <li>van der Linden, W. J., &amp; Glas, C. A. W. (Eds.) (2010). <em>Elements of Adaptive Testing</em>. Springer.</li>
 </ul>
+<hr>
+<p><a href="https://sedzinfo.r-universe.dev/golemcat" class="external-link"><img src="https://sedzinfo.r-universe.dev/golemcat/badges/version" alt="R-universe"></a> <img src="https://img.shields.io/github/stars/sedzinfo/golemcat" alt="Stars"><img src="https://img.shields.io/github/watchers/sedzinfo/golemcat" alt="Watchers"><img src="https://img.shields.io/github/repo-size/sedzinfo/golemcat" alt="Repo Size"><img src="https://img.shields.io/github/issues/sedzinfo/golemcat" alt="Open Issues"><img src="https://img.shields.io/github/forks/sedzinfo/golemcat" alt="Forks"><img src="https://img.shields.io/github/last-commit/sedzinfo/golemcat" alt="Last Commit"><img src="https://img.shields.io/github/contributors/sedzinfo/golemcat" alt="Contributors"><img src="https://img.shields.io/github/license/sedzinfo/golemcat" alt="License"><img src="https://img.shields.io/github/actions/workflow/status/sedzinfo/golemcat/build-tarball.yml" alt="Workflow Status"><img src="https://github.com/sedzinfo/golemcat/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
